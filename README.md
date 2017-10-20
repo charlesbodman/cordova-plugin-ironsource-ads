@@ -1,4 +1,5 @@
 # IronSource Ads Cordova Plugin
+# <img src="https://raw.githubusercontent.com/charlesbodman/cordova-plugin-ironsource-ads/master/ironsource_logo.png" width="500"  />
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">

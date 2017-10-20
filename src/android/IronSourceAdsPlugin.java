@@ -118,9 +118,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         return false;
     }
 
-    private void showOfferwallAction(JSONArray args, CallbackContext callbackContext) {
 
-    }
 
     private void hasInterstitialAction(JSONArray args, CallbackContext callbackContext) {
 
@@ -187,8 +185,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             errorData.put("code", ironSourceError.getErrorCode());
             errorData.put("message", ironSourceError.getErrorMessage());
             data.put("error", errorData);
-        }
-         catch (JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -230,8 +227,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         task.execute();
     }
 
-
-
     /**
      * Initializes IronSource
      * @todo Provide
@@ -262,11 +257,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         IronSource.init(this.cordova.getActivity(), appKey);
     }
 
-
-
-
-
-
     /**----------------------- SET DYNAMIC USER ID --------------------------- */
 
     private void setDynamicUserIdAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -280,12 +270,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             }
         });
     }
-
-
-
-
-
-
 
     /**----------------------- VALIDATION INTEGRATION --------------------------- */
 
@@ -301,14 +285,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             }
         });
     }
-
-
-
-
-
-
-
-
 
     /**----------------------- REWARDED VIDEO --------------------------- */
 
@@ -402,16 +378,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         this.emitWindowEvent(EVENT_REWARDED_VIDEO_FAILED, createErrorJSON(ironSourceError));
     }
 
-
-
-
-
-
-
-
-
-
-
     /**----------------------- INTERSTITIAL --------------------------- */
 
     @Override
@@ -449,10 +415,19 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         this.emitWindowEvent(EVENT_INTERSTITIAL_CLICKED, new JSONObject());
     }
 
-
-
-
     /**----------------------- OFFERWALL --------------------------- */
+
+    private void showOfferwallAction(JSONArray args, CallbackContext callbackContext) {
+        final IronSourceAdsPlugin self = this;
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                IronSource.showOfferwall();
+                callbackContext.success();
+            }
+        });
+    }
+
+
 
     @Override
     public void onOfferwallAvailable(boolean available) {
@@ -488,7 +463,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
 
         this.emitWindowEvent(EVENT_OFFERWALL_CREDITED, data);
 

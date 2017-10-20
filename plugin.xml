@@ -82,7 +82,7 @@
         </config-file>
 
         <source-file src="src/android/IronSourceAdsPlugin.java"
-            target-dir="src/com/deineagentur/cordova/plugin/ironsource" />
+            target-dir="src/com/charlesbodman/cordova/plugin/ironsource" />
         <framework src="src/android/ironsourceads.gradle" custom="true" type="gradleReference" />
         <framework src="com.google.android.gms:play-services-ads:+" />
     </platform>

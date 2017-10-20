@@ -33,7 +33,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     private static final String TAG = "[IronSourceAdsPlugin]";
 
-    private static final String EVENT_INTERSTITIAL_LOADED = "interstitialLoaded";
+    private static final String EVENT_INTERSTITIAL_READY = "interstitialReady";
     private static final String EVENT_INTERSTITIAL_SHOWN = "interstitialShown";
     private static final String EVENT_INTERSTITIAL_SHOW_FAILED = "interstitialShowFailed";
     private static final String EVENT_INTERSTITIAL_CLICKED = "interstitialClicked";
@@ -71,8 +71,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
-
-        Log.d(TAG, "Execute: " + action);
 
         if (action.equals("init")) {
             this.initAction(args, callbackContext);
@@ -123,33 +121,36 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             return true;
         }
 
-        else if (action.equals("hasInterstitial")) {
-            this.hasInterstitialAction(args, callbackContext);
+        else if (action.equals("isInterstitialReady")) {
+            this.isInterstitialReadyAction(args, callbackContext);
+            return true;
+        }
+
+        else if(action.equals("showInterstitial")){
+            this.showInterstitialAction(args, callbackContext);
             return true;
         }
 
         return false;
     }
 
+
     /**--------------------------------------------------------------- */
 
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         cordovaWebView = webView;
         super.initialize(cordova, webView);
-        Log.d(TAG, "Initializing IronSourceAdsPlugin");
     }
 
     @Override
     public void onPause(boolean multitasking) {
         super.onPause(multitasking);
-        Log.d(TAG, "onPause");
         IronSource.onPause(this.cordova.getActivity());
     }
 
     @Override
     public void onResume(boolean multitasking) {
         super.onResume(multitasking);
-        Log.d(TAG, "onResume");
         IronSource.onResume(this.cordova.getActivity());
     }
 
@@ -248,8 +249,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
         IntegrationHelper.validateIntegration(this.cordova.getActivity());
 
-        Log.d(TAG, "Initializing with userid: " + userId);
-
         // init the IronSource SDK
         IronSource.init(this.cordova.getActivity(), appKey);
     }
@@ -287,24 +286,15 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     private void showRewardedVideoAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
-        final String placementName = args.getString(0);
-
-        final IronSourceAdsPlugin self = this;
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                IronSource.showRewardedVideo(placementName);
+                IronSource.showRewardedVideo();
                 callbackContext.success();
             }
         });
     }
 
     private void hasRewardedVideoAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
-
-        final String placement;
-
-        placement = args.getString(0);
-
-        final IronSourceAdsPlugin self = this;
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 boolean available = IronSource.isRewardedVideoAvailable();
@@ -377,16 +367,37 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     /**----------------------- INTERSTITIAL --------------------------- */
 
-    private void hasInterstitialAction(JSONArray args, CallbackContext callbackContext) {
-
+    private void isInterstitialReadyAction(JSONArray args, final CallbackContext callbackContext) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                boolean ready = IronSource.isInterstitialReady();
+                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, ready));
+            }
+        });
     }
 
-    private void loadInterstitialAction(JSONArray args, CallbackContext callbackContext) {
+    private void loadInterstitialAction(JSONArray args, final CallbackContext callbackContext) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                IronSource.loadInterstitial();
+                callbackContext.success();
+            }
+        });
     }
+
+    private void showInterstitialAction(JSONArray args, final CallbackContext callbackContext) {
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                IronSource.showInterstitial();
+                callbackContext.success();
+            }
+        });
+    }
+
 
     @Override
     public void onInterstitialAdReady() {
-        this.emitWindowEvent(EVENT_INTERSTITIAL_LOADED);
+        this.emitWindowEvent(EVENT_INTERSTITIAL_READY);
     }
 
     @Override
@@ -431,15 +442,15 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         });
     }
 
-    private void hasOfferwallAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
-        final String placement = args.getString(0);
-        final IronSourceAdsPlugin self = this;
+    private void hasOfferwallAction(JSONArray args, final CallbackContext callbackContext) {
+
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 boolean available = IronSource.isOfferwallAvailable();
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, available));
             }
         });
+
     }
 
     @Override
@@ -555,6 +566,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
                         }
                     });
                 }
+
+                IronSource.loadBanner(mIronSourceBannerLayout);
 
                 callbackContext.success();
             }

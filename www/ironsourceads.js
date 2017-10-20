@@ -1,3 +1,4 @@
+
 var IronSourceAds = (function () {
 
     var initialized = false;
@@ -169,11 +170,11 @@ var IronSourceAds = (function () {
          * Checks to see if interstitial is loaded
          * @param {Function} params.onSuccess
          */
-        hasInterstitial: function hasInterstitial(params) {
+        isInterstitialReady: function isInterstitialReady(params) {
 
             params = defaults(params, {});
 
-            callPlugin('hasInterstitial', [], params.onSuccess, params.onFailure);
+            callPlugin('isInterstitialReady', [], params.onSuccess, params.onFailure);
 
         }
 
@@ -241,4 +242,3 @@ function defaults(o, defaultObject) {
 if (typeof module !== undefined && module.exports) {
     module.exports = IronSourceAds;
 }
-

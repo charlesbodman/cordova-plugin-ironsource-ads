@@ -16,6 +16,8 @@
 
 - (void)showBanner:(CDVInvokedUrlCommand *)command;
 
+- (void)hideBanner:(CDVInvokedUrlCommand *)command;
+
 - (void)showOfferwall:(CDVInvokedUrlCommand *)command;
 
 - (void)hasOfferwall:(CDVInvokedUrlCommand *)command;

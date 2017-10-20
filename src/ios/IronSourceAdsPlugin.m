@@ -31,6 +31,7 @@ static NSString *const EVENT_BANNER_WILL_PRESENT_SCREEN = @"bannerWillPresentScr
 static NSString *const EVENT_BANNER_DID_DISMISS_SCREEN = @"bannerDidDismissScreen";
 static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveApplication";
 
+
 #define USERID @"demoapp"
 
 @implementation IronSourceAdsPlugin
@@ -236,6 +237,13 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
+
+
+- (void)hideBanner:(CDVInvokedUrlCommand *)command
+{
+
+}
+
 
 // Banner dismissed screen
 - (void)bannerDidDismissScreen

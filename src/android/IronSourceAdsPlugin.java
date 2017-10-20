@@ -33,7 +33,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     private static final String TAG = "[IronSourceAdsPlugin]";
 
-    private static final String EVENT_INTERSTITIAL_READY = "interstitialReady";
+    private static final String EVENT_INTERSTITIAL_LOADED = "interstitialLoaded";
     private static final String EVENT_INTERSTITIAL_SHOWN = "interstitialShown";
     private static final String EVENT_INTERSTITIAL_SHOW_FAILED = "interstitialShowFailed";
     private static final String EVENT_INTERSTITIAL_CLICKED = "interstitialClicked";
@@ -121,8 +121,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             return true;
         }
 
-        else if (action.equals("isInterstitialReady")) {
-            this.isInterstitialReadyAction(args, callbackContext);
+        else if (action.equals("hasInterstitial")) {
+            this.hasInterstitialAction(args, callbackContext);
             return true;
         }
 
@@ -367,7 +367,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     /**----------------------- INTERSTITIAL --------------------------- */
 
-    private void isInterstitialReadyAction(JSONArray args, final CallbackContext callbackContext) {
+    private void hasInterstitialAction(JSONArray args, final CallbackContext callbackContext) {
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 boolean ready = IronSource.isInterstitialReady();
@@ -397,7 +397,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     @Override
     public void onInterstitialAdReady() {
-        this.emitWindowEvent(EVENT_INTERSTITIAL_READY);
+        this.emitWindowEvent(EVENT_INTERSTITIAL_LOADED);
     }
 
     @Override

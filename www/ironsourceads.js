@@ -170,11 +170,11 @@ var IronSourceAds = (function () {
          * Checks to see if interstitial is loaded
          * @param {Function} params.onSuccess
          */
-        isInterstitialReady: function isInterstitialReady(params) {
+        hasInterstitial: function isInterstitialReady(params) {
 
             params = defaults(params, {});
 
-            callPlugin('isInterstitialReady', [], params.onSuccess, params.onFailure);
+            callPlugin('hasInterstitial', [], params.onSuccess, params.onFailure);
 
         }
 

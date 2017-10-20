@@ -20,10 +20,10 @@
 
 - (void)hasOfferwall:(CDVInvokedUrlCommand *)command;
 
+- (void)loadInterstitial:(CDVInvokedUrlCommand *)command;
+
 - (void)hasInterstitial:(CDVInvokedUrlCommand *)command;
 
 - (void)showInterstitial:(CDVInvokedUrlCommand *)command;
-
-- (void)loadInterstitial:(CDVInvokedUrlCommand *)command;
 
 @end

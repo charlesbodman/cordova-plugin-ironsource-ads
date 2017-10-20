@@ -1,12 +1,12 @@
 #import "IronSourceAdsPlugin.h"
 #import <Cordova/CDVViewController.h>
 
-static NSString *const EVENT_INTERSITIAL_LOADED                  = @"inverstitialLoaded";
+static NSString *const EVENT_INTERSTITIAL_LOADED                  = @"interstitialLoaded";
 static NSString *const EVENT_INTERSTITIAL_SHOWN                  = @"interstitialShown";
 static NSString *const EVENT_INTERSTITIAL_SHOW_FAILED            = @"interstitialShowFailed";
 static NSString *const EVENT_INTERSTITIAL_CLICKED                = @"interstitialClicked";
 static NSString *const EVENT_INTERSTITIAL_CLOSED                 = @"interstitialClosed";
-static NSString *const EVENT_INTERSITIAL_WILL_OPEN               = @"interstitialWillOpen";
+static NSString *const EVENT_INTERSTITIAL_WILL_OPEN               = @"interstitialWillOpen";
 static NSString *const EVENT_INTERSTITIAL_FAILED_TO_LOAD         = @"interstitialFailedToLoad";
 
 static NSString *const EVENT_OFFERWALL_CLOSED                    = @"offerwallClosed";
@@ -483,12 +483,12 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION       = @"bannerWillL
 
 - (void)interstitialDidLoad {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self emitWindowEvent:EVENT_INTERSITIAL_LOADED];
+    [self emitWindowEvent:EVENT_INTERSTITIAL_LOADED];
 }
 
 - (void)interstitialDidOpen {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self emitWindowEvent:EVENT_INTERSITIAL_WILL_OPEN];
+    [self emitWindowEvent:EVENT_INTERSTITIAL_WILL_OPEN];
 }
 
 - (void)interstitialDidShow {

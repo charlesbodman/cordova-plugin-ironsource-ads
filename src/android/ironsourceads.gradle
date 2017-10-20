@@ -14,7 +14,7 @@ cdvPluginPostBuildExtras.add({
 
   dependencies {
     compile 'com.ironsource.sdk:mediationsdk:6.7.0@jar'
-    compile 'com.ironsource.adapters:adcolonyadapter:4.0.0@jar'
+    compile 'com.ironsource.adapters:admobadapter:4.0.0@jar'
     compile 'com.ironsource.adapters:unityadsadapter:4.0.0@jar'
     compile 'com.ironsource.adapters:applovinadapter:4.0.0@jar'
   }

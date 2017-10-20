@@ -1,0 +1,21 @@
+cdvPluginPostBuildExtras.add({
+
+  repositories {
+    maven {
+      url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+    }
+  }
+
+  repositories {
+    maven {
+      url "http://dl.bintray.com/ironsource-mobile/android-adapters"
+    }
+  }
+
+  dependencies {
+    compile 'com.ironsource.sdk:mediationsdk:6.7.0@jar'
+    compile 'com.ironsource.adapters:adcolonyadapter:4.0.0@jar'
+    compile 'com.ironsource.adapters:unityadsadapter:4.0.0@jar'
+    compile 'com.ironsource.adapters:applovinadapter:4.0.0@jar'
+  }
+});

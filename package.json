@@ -1,0 +1,21 @@
+{
+  "name": "cordova-plugin-ironsource-ads",
+  "version": "0.0.1",
+  "description": "Ironsource ads for cordova based development",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charlesbodman/cordova-plugin-ironsource-ads.git"
+  },
+  "keywords": [
+    "cordova",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Charles Bodman",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/charlesbodman/cordova-plugin-ironsource-ads/issues"
+  },
+  "homepage": "https://github.com/charlesbodman/cordova-plugin-ironsource-ads"
+}

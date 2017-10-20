@@ -1,0 +1,126 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-ironsource-ads" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+    <name>cordova-plugin-ironsource-ads</name>
+    <description>Cordova plugin for IronSource Ads</description>
+    <js-module src="www/ironsourceads.js" name="IronSourceAds">
+        <clobbers target="IronSourceAds" />
+    </js-module>
+
+    <engines>
+        <engine name="cordova" version=">=3.0" />
+        <engine name="cordova-android" version=">=4.0.0" />
+        <engine name="cordova-ios" version=">=4.0.0" />
+    </engines>
+
+    <platform name="android">
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="IronSourceAdsPlugin">
+                <param name="android-package" value="com.charlesbodman.cordova.plugin.ironsource.IronSourceAdsPlugin" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+          <uses-permission android:name="android.permission.INTERNET" />
+          <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+        <!--Requested by Applovin + HyperMX + Vungle -->
+        <uses-permission
+            android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+            android:maxSdkVersion="18" />
+
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+
+            <activity
+            android:name="com.ironsource.sdk.controller.ControllerActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true" />
+
+            <activity
+            android:name="com.ironsource.sdk.controller.InterstitialActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent" />
+
+            <activity
+            android:name="com.ironsource.sdk.controller.OpenUrlActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent" />
+
+            <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+
+            <!-- UnityAds-->
+            <activity
+                android:name="com.unity3d.ads.adunit.AdUnitActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            <activity
+                android:name="com.unity3d.ads.adunit.AdUnitSoftwareActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="false"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+
+            <!-- AppLovin -->
+            <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"  android:configChanges="orientation|screenSize"/>
+            <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
+
+
+            <!-- AdMob -->
+            <activity
+                android:name="com.google.android.gms.ads.AdActivity"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                android:theme="@android:style/Theme.Translucent" />
+
+
+        </config-file>
+
+        <source-file src="src/android/IronSourceAdsPlugin.java"
+            target-dir="src/com/deineagentur/cordova/plugin/ironsource" />
+        <framework src="src/android/ironsourceads.gradle" custom="true" type="gradleReference" />
+        <framework src="com.google.android.gms:play-services-ads:+" />
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IronSourceAdsPlugin">
+                <param name="ios-package" value="IronSourceAdsPlugin" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/IronSourceAdsPlugin.h" />
+        <source-file src="src/ios/IronSourceAdsPlugin.m" />
+        <framework src="src/ios/IronSource.framework" custom="true" />
+
+        <!-- Admob -->
+        <framework src="src/ios/mediation_adapters/ISAdMobAdapter.framework" custom="true" />
+
+        <!-- UnityAds -->
+        <framework src="src/ios/mediation_adapters/ISUnityAdsAdapter.framework" custom="true" />
+
+        <!-- AppLovin -->
+        <framework src="src/ios/mediation_adapters/ISAppLovinAdapter.framework" custom="true" />
+
+
+        <framework src="Foundation.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CFNetwork.framework" />
+        <framework src="MobileCoreServices.framework" />
+        <framework src="libz.dylib" />
+        <framework src="StoreKit.framework" />
+        <framework src="AdSupport.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="Security.framework" />
+    </platform>
+</plugin>

@@ -333,7 +333,14 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 - (BOOL)didReceiveOfferwallCredits:(NSDictionary *)creditInfo
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self emitWindowEvent:EVENT_OFFERWALL_CREDITED withData:creditInfo];
+
+    NSDictionary *data = @{
+        @"credits":@(creditInfo.credits),
+        @"totalCredits":@(creditInfo.totalCredits),
+        @"totalCreditsFlag":@(creditInfo.totalCreditsFlag)
+    };
+
+    [self emitWindowEvent:EVENT_OFFERWALL_CREDITED withData:data];
     return YES;
 }
 
@@ -430,7 +437,7 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
         }
     };
 
-    [self emitWindowEvent:EVENT_INTERSTITIAL_FAILED_TO_LOAD, data];
+    [self emitWindowEvent:EVENT_INTERSTITIAL_FAILED_TO_LOAD withData:data];
 }
 
 - (void)interstitialDidFailToShowWithError:(NSError *)error

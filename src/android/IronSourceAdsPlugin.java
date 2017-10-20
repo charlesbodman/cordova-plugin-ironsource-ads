@@ -126,14 +126,13 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             return true;
         }
 
-        else if(action.equals("showInterstitial")){
+        else if (action.equals("showInterstitial")) {
             this.showInterstitialAction(args, callbackContext);
             return true;
         }
 
         return false;
     }
-
 
     /**--------------------------------------------------------------- */
 
@@ -394,7 +393,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         });
     }
 
-
     @Override
     public void onInterstitialAdReady() {
         this.emitWindowEvent(EVENT_INTERSTITIAL_LOADED);
@@ -503,7 +501,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         this.emitWindowEvent(EVENT_OFFERWALL_CLOSED);
     }
 
-
     /**----------------------- BANNER --------------------------- */
 
     private void showBannerAction(JSONArray args, final CallbackContext callbackContext) {
@@ -575,8 +572,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     }
 
-
-
     /**
      * Destroys IronSource Banner and removes it from the container
      */
@@ -589,6 +584,5 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
         callbackContext.success();
     }
-
 
 }

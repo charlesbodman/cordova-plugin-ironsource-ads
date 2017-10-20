@@ -333,14 +333,7 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 - (BOOL)didReceiveOfferwallCredits:(NSDictionary *)creditInfo
 {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-
-    NSDictionary *data = @{
-        @"credits":@(creditInfo.credits),
-        @"totalCredits":@(creditInfo.totalCredits),
-        @"totalCreditsFlag":@(creditInfo.totalCreditsFlag)
-    };
-
-    [self emitWindowEvent:EVENT_OFFERWALL_CREDITED withData:data];
+    [self emitWindowEvent:EVENT_OFFERWALL_CREDITED withData:creditInfo];
     return YES;
 }
 

@@ -40,6 +40,11 @@ cordova plugin add cordova-plugin-ironsource-ads
   - [Has Rewarded Video](#has-rewarded-video)
   - [Show Rewarded Video](#show-rewarded-video)
   - [Rewarded Video Events](#rewarded-video-events)
+- [Offerwalls](#offerwalls)
+  - [Has Offerwall](#has-offerwall)
+  - [Show Offerwall](#show-offerwall)
+  - [Offerwall Events](#offerwall-events)
+  
   
 All methods support optional `onSuccess` and `onFailure` parameters
 
@@ -67,10 +72,10 @@ IronSourceAds.validateIntegration();
 ```javascript
 IronSourceAds.setDynamicUserId({userId:'example'});
 ```
-
+***
 ### Rewarded Videos
 
-### Has Rewarded Video
+#### Has Rewarded Video
 
 ```javascript
 IronSourceAds.hasRewardedVideo({
@@ -80,12 +85,12 @@ IronSourceAds.hasRewardedVideo({
 });
 ```
 
-### Show Rewarded Video
+#### Show Rewarded Video
 ```javascript
 IronSourceAds.showRewardedVideo();
 ```
 
-### Rewarded Video Events
+#### Rewarded Video Events
 
 
 **Rewarded Video Availabilty Changed**
@@ -134,6 +139,68 @@ window.addEventListener("rewardedVideoClosed", function(){
 **Rewarded Video Failed**
 ```javascript
 window.addEventListener("rewardedVideoFailed", function(){
+
+});
+```
+
+***
+
+### Offerwalls
+
+#### Has Offerwall
+
+```javascript
+IronSourceAds.hasOfferwall({
+    onSuccess: function (available) {
+
+    }
+});
+```
+
+#### Show Offerwall
+```javascript
+IronSourceAds.showOfferwall();
+```
+
+#### Offerwall Events
+
+**Offerwall Availability Changed**
+```javascript
+window.addEventListener("offerwallAvailabilityChanged", function(){
+
+});
+```
+
+**Offerwall Shown**
+```javascript
+window.addEventListener("offerwallShown", function(){
+
+});
+```
+**Offerwall Credit Recieved**
+```javascript
+window.addEventListener("offerwallCreditReceived", function(event){
+  
+  var credits = event.credits; // The number of credits the user has earned since //the last (void)didReceiveOfferwallCredits:
+  var totalCredits = event.totalCredits; //The total number of credits ever earned by the user
+  
+});
+```
+**Offerwall Credit Failed**
+```javascript
+window.addEventListener("offerwallCreditFailed", function(){
+
+});
+```
+**Offerwall Closed**
+```javascript
+window.addEventListener("offerwallClosed", function(){
+
+});
+```
+**Offerwall Show Failed**
+```javascript
+window.addEventListener("offerwallShowFailed", function(){
 
 });
 ```

@@ -66,7 +66,7 @@ IronSourceAds.validateIntegration();
 **Check xcode / android studio debugger for validation output**
 <img src="https://github.com/charlesbodman/cordova-plugin-ironsource-ads/blob/master/images/integration_helper.png"/>
 
-
+***
 ### Set Dynamic User ID
 > The Dynamic UserID is a parameter that can be changed throughout the session and will be received in the server-to-server ad > rewarded callbacks. This parameter helps verify AdRewarded transactions and must be set before calling ShowRV.
 ```javascript
@@ -166,8 +166,8 @@ IronSourceAds.showOfferwall();
 
 **Offerwall Availability Changed**
 ```javascript
-window.addEventListener("offerwallAvailabilityChanged", function(){
-
+window.addEventListener("offerwallAvailabilityChanged", function(event){
+  var available = event.available;
 });
 ```
 

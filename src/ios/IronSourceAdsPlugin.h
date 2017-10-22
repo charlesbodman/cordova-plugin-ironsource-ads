@@ -6,7 +6,7 @@
 
 - (void)init:(CDVInvokedUrlCommand *)command;
 
-- (void)setUserId:(CDVInvokedUrlCommand *)command;
+- (void)setDynamicUserId:(CDVInvokedUrlCommand *)command;
 
 - (void)validateIntegration:(CDVInvokedUrlCommand *)command;
 

@@ -71,10 +71,11 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
-- (void)setUserId:(CDVInvokedUrlCommand *)command
+- (void)setDynamicUserId:(CDVInvokedUrlCommand *)command
 {
     NSString *userId = [command argumentAtIndex:0];
-    [IronSource setUserId:userId];
+
+    [IronSource setDynamicUserId:userId];
 
     // Send callback successfull
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];

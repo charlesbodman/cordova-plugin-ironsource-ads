@@ -45,6 +45,7 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 - (void)init:(CDVInvokedUrlCommand *)command
 {
     NSString *appKey = [command argumentAtIndex:0];
+    NSString *userId = [command argumentAtIndex:1];
 
     [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @(YES);
 
@@ -53,11 +54,13 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     [IronSource setBannerDelegate:self];
     [IronSource setInterstitialDelegate:self];
 
-    NSString *userId = [IronSource advertiserId];
+    if ([userId length] == 0)
+    {
+        userId = [IronSource advertiserId];
+    }
 
     if ([userId length] == 0)
     {
-        //If we couldn't get the advertiser id, we will use a default one.
         userId = USERID;
     }
 

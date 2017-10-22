@@ -198,6 +198,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     private void initAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
         final String appKey = args.getString(0);
+        final String userId = args.getString(1);
 
         final IronSourceAdsPlugin self = this;
 
@@ -211,11 +212,17 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
             @Override
             protected void onPostExecute(String advertisingId) {
-                if (TextUtils.isEmpty(advertisingId)) {
-                    advertisingId = FALLBACK_USER_ID;
+
+                if(TextUtils.isEmpty(userId)){
+                    userId = advertisingId;
                 }
+
+                if (TextUtils.isEmpty(userId)) {
+                    userId = FALLBACK_USER_ID;
+                }
+
                 // we're using an advertisingId as the 'userId'
-                init(appKey, advertisingId);
+                init(appKey, userId);
                 callbackContext.success();
 
             }

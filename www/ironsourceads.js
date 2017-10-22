@@ -51,7 +51,7 @@ var IronSourceAds = (function () {
          */
         init: function init(params) {
 
-            params = defaults(params, {});
+            params = defaults(params, { userId: '' });
 
             if (params.hasOwnProperty('appKey') === false) {
                 throw new Error('IronSourceAds::init - appKey is required');

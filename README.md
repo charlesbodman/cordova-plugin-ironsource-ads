@@ -40,6 +40,11 @@ cordova plugin add cordova-plugin-ironsource-ads
   - [Has Rewarded Video](#has-rewarded-video)
   - [Show Rewarded Video](#show-rewarded-video)
   - [Rewarded Video Events](#rewarded-video-events)
+- [Interstitials](#interstitials)
+  - [Has Interstitial](#has-interstitial)
+  - [Load Interstitial](#load-interstitial)
+  - [Show Interstitial](#show-interstitial)
+  - [Interstitial Events](#interstitial-events)
 - [Offerwalls](#offerwalls)
   - [Has Offerwall](#has-offerwall)
   - [Show Offerwall](#show-offerwall)
@@ -142,7 +147,71 @@ window.addEventListener("rewardedVideoFailed", function(){
 
 });
 ```
+***
+### Interstitial
 
+#### Has Interstitial
+```javascript
+IronSourceAds.hasInterstitial({
+    onSuccess: function (available) {
+
+    }
+});
+```
+#### Load Interstitial
+```javascript
+IronSourceAds.loadInterstitial();
+```
+***
+#### Show Interstitial
+```javascript
+IronSourceAds.showInterstitial();
+```
+***
+#### Interstitial Events
+
+**Interstitial Loaded**
+```javascript
+window.addEventListener("interstitialLoaded", function(){
+
+});
+```
+**Interstitial Shown**
+```javascript
+window.addEventListener("interstitialShown", function(){
+
+});
+```
+**Interstitial Show Failed**
+```javascript
+window.addEventListener("interstitialShowFailed", function(){
+
+});
+```
+**Interstitial Clicked**
+```javascript
+window.addEventListener("interstitialClicked", function(){
+
+});
+```
+**Interstitial Closed**
+```javascript
+window.addEventListener("interstitialClosed", function(){
+
+});
+```
+**Interstitial Will Open**
+```javascript
+window.addEventListener("interstitialClosed", function(){
+
+});
+```
+**Interstitial Failed To Load**
+```javascript
+window.addEventListener("interstitialFailedToLoad", function(){
+
+});
+```
 ***
 
 ### Offerwalls

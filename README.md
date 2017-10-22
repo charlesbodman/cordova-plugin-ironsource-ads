@@ -33,12 +33,17 @@ cordova plugin add cordova-plugin-ironsource-ads
 -------- 
 ## Usage
 
-- [Initialize](#initialize)
-
-
+- [Initialization](#initialization)
+- [Validate Integration](#validate-integration)
+- [Set Dynamic User ID](#set-dynamic-user-id)
+- [Rewarded Videos](#rewarded-videos)
+  - [Has Rewarded Video](#has-rewarded-video)
+  - [Show Rewarded Video](#show-rewarded-video)
+  - [Rewarded Video Events](#rewarded-video-events)
+  
 All methods support optional `onSuccess` and `onFailure` parameters
 
-### Initialize
+### Initialization
 ```javascript
 IronSourceAds.init({
     appKey: appKey
@@ -53,9 +58,82 @@ IronSourceAds.validateIntegration();
 ```
 
 
-
 **Check xcode / android studio debugger for validation output**
 <img src="https://github.com/charlesbodman/cordova-plugin-ironsource-ads/blob/master/images/integration_helper.png"/>
 
 
-#
+### Set Dynamic User ID
+> The Dynamic UserID is a parameter that can be changed throughout the session and will be received in the server-to-server ad > rewarded callbacks. This parameter helps verify AdRewarded transactions and must be set before calling ShowRV.
+```javascript
+IronSourceAds.setDynamicUserId({userId:'example'});
+```
+
+### Rewarded Videos
+
+### Has Rewarded Video
+
+```javascript
+IronSourceAds.hasRewardedVideo({
+    onSuccess: function (available) {
+
+    }
+});
+```
+
+### Show Rewarded Video
+```javascript
+IronSourceAds.showRewardedVideo();
+```
+
+### Rewarded Video Events
+
+
+**Rewarded Video Availabilty Changed**
+```javascript
+window.addEventListener("rewardedVideoAvailabilityChanged", function(event){
+
+    var available = event.available;
+    
+});
+```
+**Rewarded Video Rewarded**
+```javascript
+window.addEventListener("rewardedVideoRewardReceived", function(event){
+
+    var placement = event.placement;
+    var placementName = placement.placementName;
+    var rewardAmount = placement.rewardAmount;
+    var rewardName = placement.rewardName;
+    
+});
+```
+**Rewarded Video Started**
+```javascript
+window.addEventListener("rewardedVideoStarted", function(){
+
+});
+```
+**Rewarded Video Ended**
+```javascript
+window.addEventListener("rewardedVideoEnded", function(){
+
+});
+```
+**Rewarded Video Opened**
+```javascript
+window.addEventListener("rewardedVideoOpened", function(){
+
+});
+```
+**Rewarded Video Closed**
+```javascript
+window.addEventListener("rewardedVideoClosed", function(){
+
+});
+```
+**Rewarded Video Failed**
+```javascript
+window.addEventListener("rewardedVideoFailed", function(){
+
+});
+```

@@ -57,7 +57,7 @@ var IronSourceAds = (function () {
                 throw new Error('IronSourceAds::init - appKey is required');
             }
 
-            callPlugin('init', [params.appKey], function () {
+            callPlugin('init', [params.appKey, params.userId], function () {
 
                 initialized = true;
 

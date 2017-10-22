@@ -159,6 +159,7 @@ IronSourceAds.hasInterstitial({
 });
 ```
 #### Load Interstitial
+_Must be called before `showInterstitial`
 ```javascript
 IronSourceAds.loadInterstitial();
 ```

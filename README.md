@@ -78,8 +78,8 @@ Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
 
         <!-- ADD MEDIATION FRAMEWORKS HERE -->
         <!-- Example -->
-        <framework src="ISAdColonyAdapter.framework">
-        <framework src="ISAdMobAdapter.framework">
+        <framework src="ISAdColonyAdapter.framework" custom="true" />
+        <framework src="ISAdMobAdapter.framework" custom="true" />
         <!-- Example -->
 
         <framework src="Foundation.framework" />

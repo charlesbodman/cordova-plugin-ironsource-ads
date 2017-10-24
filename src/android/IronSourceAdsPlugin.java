@@ -53,9 +53,9 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     private static final String EVENT_REWARDED_VIDEO_ENDED = "rewardedVideoEnded";
     private static final String EVENT_REWARDED_VIDEO_STARTED = "rewardedVideoStarted";
     private static final String EVENT_REWARDED_VIDEO_AVAILABILITY_CHANGED = "rewardedVideoAvailabilityChanged";
-
     private static final String EVENT_REWARDED_VIDEO_CLOSED = "rewardedVideoClosed";
     private static final String EVENT_REWARDED_VIDEO_OPENED = "rewardedVideoOpened";
+
     private static final String EVENT_BANNER_DID_LOAD = "bannerDidLoad";
     private static final String EVENT_BANNER_FAILED_TO_LOAD = "bannerFailedToLoad";
     private static final String EVENT_BANNER_DID_CLICK = "bannerDidClick";

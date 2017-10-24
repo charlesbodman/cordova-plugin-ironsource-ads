@@ -23,32 +23,175 @@
         <config-file target="AndroidManifest.xml" parent="/manifest">
           <uses-permission android:name="android.permission.INTERNET" />
           <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
           <!-- ADD MEDIATION PERMISSIONS HERE -->
+
+            <!--Requested by Applovin + HyperMX + Vungle -->
+            <uses-permission
+                android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+                android:maxSdkVersion="18" />
+
+            <!--Requested by Flurry -->
+            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+            <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+
 
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
 
-            <activity
-            android:name="com.ironsource.sdk.controller.ControllerActivity"
-            android:configChanges="orientation|screenSize"
-            android:hardwareAccelerated="true" />
-
-            <activity
-            android:name="com.ironsource.sdk.controller.InterstitialActivity"
-            android:configChanges="orientation|screenSize"
-            android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent" />
-
-            <activity
-            android:name="com.ironsource.sdk.controller.OpenUrlActivity"
-            android:configChanges="orientation|screenSize"
-            android:hardwareAccelerated="true"
-            android:theme="@android:style/Theme.Translucent" />
-
             <meta-data android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+            <activity
+                android:name="com.ironsource.sdk.controller.ControllerActivity"
+                android:configChanges="orientation|screenSize"
+                android:hardwareAccelerated="true" />
+            <activity
+                android:name="com.ironsource.sdk.controller.InterstitialActivity"
+                android:configChanges="orientation|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent" />
+            <activity
+                android:name="com.ironsource.sdk.controller.OpenUrlActivity"
+                android:configChanges="orientation|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent" />
+
+            <!-- AdColony -->
+            <activity
+                android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:hardwareAccelerated="true" />
+
+            <activity
+                android:name="com.adcolony.sdk.AdColonyAdViewActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:hardwareAccelerated="true" />
+
+            <!-- Vungle -->
+            <activity
+                android:name="com.vungle.publisher.VideoFullScreenAdActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+            <activity
+                android:name="com.vungle.publisher.MraidFullScreenAdActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+
+            <!-- AppLovin -->
+            <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"  android:configChanges="orientation|screenSize"/>
+
+            <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
+
+            <!-- UnityAds-->
+            <activity
+                android:name="com.unity3d.ads.adunit.AdUnitActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            <activity
+                android:name="com.unity3d.ads.adunit.AdUnitSoftwareActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="false"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+            <!-- Chartboost-->
+            <activity
+                android:name="com.chartboost.sdk.CBImpressionActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:excludeFromRecents="true"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+            <!-- HyprMx-->
+            <activity
+                android:name="com.ironsource.adapters.hyprmx.MediationHMXActivity"
+                android:configChanges="orientation|screenSize|keyboardHidden|keyboard|smallestScreenSize|uiMode|fontScale|screenLayout|locale">
+            </activity>
+
+            <activity
+                android:name="com.hyprmx.android.sdk.activity.HyprMXOfferViewerActivity"
+                android:hardwareAccelerated="true"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:label="HyprMX SDK"
+                android:launchMode="singleTop"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+            <activity
+                android:name="com.hyprmx.android.sdk.activity.HyprMXRequiredInformationActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+            <activity
+                android:name="com.hyprmx.android.sdk.activity.HyprMXNoOffersActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+            <activity
+                android:name="com.hyprmx.android.sdk.videoplayer.HyprMXVideoPlayerActivity"
+                android:hardwareAccelerated="true"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+
+            <!-- InMobi-->
+            <activity
+                android:name="com.inmobi.rendering.InMobiAdActivity"
+                android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize|screenLayout"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.NoTitleBar" />
+
+            <receiver
+                android:name="com.inmobi.commons.core.utilities.uid.ImIdShareBroadCastReceiver"
+                android:enabled="true"
+                android:exported="true">
+                <intent-filter>
+                    <action android:name="com.inmobi.share.id" />
+                </intent-filter>
+            </receiver>
+
+            <service
+                android:name="com.inmobi.signals.activityrecognition.ActivityRecognitionManager"
+                android:enabled="true" />
+
+            <!-- TapJoy -->
+            <activity
+                android:name="com.tapjoy.TJAdUnitActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            <activity
+                android:name="com.tapjoy.mraid.view.ActionHandler"
+                android:configChanges="orientation|keyboardHidden|screenSize" />
+            <activity
+                android:name="com.tapjoy.mraid.view.Browser"
+                android:configChanges="orientation|keyboardHidden|screenSize" />
+            <activity
+                android:name="com.tapjoy.TJContentActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+            <!-- AdMob -->
+            <activity
+                android:name="com.google.android.gms.ads.AdActivity"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                android:theme="@android:style/Theme.Translucent" />
+
+            <!-- MediaBrix -->
+            <activity
+                android:name="com.mediabrix.android.service.AdViewActivity"
+                android:configChanges="orientation|screenSize|keyboard"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            <service android:name="com.mediabrix.android.service.MediaBrixService" />
+
+
+            <!-- Facebook -->
+            <activity android:name="com.facebook.ads.InterstitialAdActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+
+            <activity android:name="com.facebook.ads.AudienceNetworkActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
 
 
         </config-file>
@@ -70,6 +213,10 @@
         <framework src="src/ios/IronSource.framework" custom="true" />
 
         <!-- ADD MEDIATION FRAMEWORKS HERE -->
+        <!-- Example -->
+        <framework src="ISAdColonyAdapter.framework">
+        <framework src="ISAdMobAdapter.framework">
+        <!-- Example -->
 
         <framework src="Foundation.framework" />
         <framework src="AVFoundation.framework" />

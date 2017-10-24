@@ -57,7 +57,7 @@ All methods support optional `onSuccess` and `onFailure` parameters
 ```javascript
 IronSourceAds.init({
     appKey: appKey
-};
+});
 ```
 
 ### Validate Integration

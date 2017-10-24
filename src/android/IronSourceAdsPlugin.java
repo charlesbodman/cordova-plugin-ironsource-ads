@@ -198,7 +198,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     private void initAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
         final String appKey = args.getString(0);
-        final String userId = args.getString(1);
+        final String providedUserId = args.getString(1);
 
         final IronSourceAdsPlugin self = this;
 
@@ -212,6 +212,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
             @Override
             protected void onPostExecute(String advertisingId) {
+
+                String userId = providedUserId;
 
                 if(TextUtils.isEmpty(userId)){
                     userId = advertisingId;
@@ -252,8 +254,6 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
         // Set user id
         IronSource.setUserId(userId);
-
-        IntegrationHelper.validateIntegration(this.cordova.getActivity());
 
         // init the IronSource SDK
         IronSource.init(this.cordova.getActivity(), appKey);

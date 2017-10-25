@@ -4,6 +4,9 @@
 
 @interface IronSourceAdsPlugin : CDVPlugin <ISRewardedVideoDelegate, ISBannerDelegate, ISOfferwallDelegate, ISInterstitialDelegate>
 
+@property (nonatomic, strong) ISBannerView *bannerView;
+@property (nonatomic) bool loadingBanner;
+
 - (void)init:(CDVInvokedUrlCommand *)command;
 
 - (void)setDynamicUserId:(CDVInvokedUrlCommand *)command;
@@ -13,8 +16,6 @@
 - (void)showRewardedVideo:(CDVInvokedUrlCommand *)command;
 
 - (void)hasRewardedVideo:(CDVInvokedUrlCommand *)command;
-
-- (void)isRewardedVideoCappedForPlacement:(CDVInvokedUrlCommand *)command;
 
 - (void)showBanner:(CDVInvokedUrlCommand *)command;
 

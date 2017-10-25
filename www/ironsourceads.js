@@ -115,6 +115,19 @@ var IronSourceAds = (function () {
 
         },
 
+        /**
+         * Hide banner
+         * @param {Function} [params.onSuccess]
+         * @param {Function} [params.onFailure]
+         */
+        hideBanner: function hideBanner(params){
+
+            params = defaults(params, {});
+
+            callPlugin('hideBanner', [], params.onSuccess, params.onFailure);
+
+        },
+
 
         /**
          * Checks if offerwall is available

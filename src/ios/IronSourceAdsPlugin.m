@@ -69,6 +69,8 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
     [IronSource initWithAppKey:appKey];
 
+    self.loadingBanner = false;
+
     // Send callback successfull
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
@@ -259,6 +261,12 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 // Show banner
 - (void)showBanner:(CDVInvokedUrlCommand *)command
 {
+    // We call destroy banner before loading a new banner
+    if (self.bannerView) {
+        [self destroyBanner];
+    }
+
+    self.loadingBanner = true;
 
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [IronSource loadBannerWithViewController:self.viewController size:IS_AD_SIZE_BANNER];
@@ -268,12 +276,26 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
-
 - (void)hideBanner:(CDVInvokedUrlCommand *)command
 {
+    [self destroyBanner];
 
+    // Send callback successfull
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
+- (void)destroyBanner
+{
+    self.loadingBanner = false;
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.bannerView) {
+            [IronSource destroyBanner:self.bannerView];
+            self.bannerView = nil;
+        }
+    });
+}
 
 // Banner dismissed screen
 - (void)bannerDidDismissScreen
@@ -300,29 +322,35 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
 - (void)bannerDidLoad:(ISBannerView *)bannerView
 {
-    CGFloat xOffset = .0f;
-    CGFloat yOffset = .0f;
+    if(self.loadingBanner == true){
 
-    CGFloat bannerHeight    = bannerView.frame.size.height;
-    CGFloat bannerWidth     = bannerView.frame.size.width;
+        self.bannerView = bannerView;
 
-    UIScreen* mainScreen = [UIScreen mainScreen];
+        CGFloat xOffset = .0f;
+        CGFloat yOffset = .0f;
 
-    CGFloat screenHeight = mainScreen.bounds.size.height; //points
-    CGFloat screenWidth = mainScreen.bounds.size.width; //points
+        CGFloat bannerHeight    = bannerView.frame.size.height;
+        CGFloat bannerWidth     = bannerView.frame.size.width;
 
-    xOffset = (screenWidth - bannerWidth) / 2;
-    yOffset = screenHeight - bannerHeight;
+        UIScreen* mainScreen = [UIScreen mainScreen];
 
-    CGRect bannerRect = CGRectMake(xOffset, yOffset, bannerWidth, bannerHeight);
+        CGFloat screenHeight = mainScreen.bounds.size.height;
+        CGFloat screenWidth = mainScreen.bounds.size.width;
 
-    bannerView.frame = bannerRect;
+        xOffset = (screenWidth - bannerWidth) / 2;
+        yOffset = screenHeight - bannerHeight;
 
-    [self.viewController.view addSubview:bannerView];
-    [self.viewController.view bringSubviewToFront:bannerView];
+        CGRect bannerRect = CGRectMake(xOffset, yOffset, bannerWidth, bannerHeight);
 
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    [self emitWindowEvent:EVENT_BANNER_DID_LOAD];
+        bannerView.frame = bannerRect;
+
+        [self.viewController.view addSubview:bannerView];
+        [self.viewController.view bringSubviewToFront:bannerView];
+
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+        [self emitWindowEvent:EVENT_BANNER_DID_LOAD];
+
+    }
 }
 
 - (void)bannerWillLeaveApplication

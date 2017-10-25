@@ -126,10 +126,36 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
 #pragma mark - Rewarded Video Delegate Functions
 
+
+/**
+* Checks for if rewarded video placement is capped
+*/
+- (void)isRewardedVideoCappedForPlacement:(CDVInvokedUrlCommand *)command
+{
+    NSString *placement = [command argumentAtIndex:0];
+    BOOL capped = [IronSource isRewardedVideoCappedForPlacement:placement];
+
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsBool:capped];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
+
+/**
+* Show rewarded video
+*/
 - (void)showRewardedVideo:(CDVInvokedUrlCommand *)command
 {
+    NSString *placement = [command argumentAtIndex:0];
 
-    [IronSource showRewardedVideoWithViewController:self.viewController];
+    if( placement == nil || [placement length] == 0)
+    {
+        [IronSource showRewardedVideoWithViewController:self.viewController];
+    }
+    else
+    {
+        [IronSource showRewardedVideoWithViewController:self.viewController placement:placement];
+    }
+
 
     // Send callback successfull
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -274,6 +300,27 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
 - (void)bannerDidLoad:(ISBannerView *)bannerView
 {
+    CGFloat xOffset = .0f;
+    CGFloat yOffset = .0f;
+
+    CGFloat bannerHeight    = bannerView.frame.size.height;
+    CGFloat bannerWidth     = bannerView.frame.size.width;
+
+    UIScreen* mainScreen = [UIScreen mainScreen];
+
+    CGFloat screenHeight = mainScreen.bounds.size.height; //points
+    CGFloat screenWidth = mainScreen.bounds.size.width; //points
+
+    xOffset = (screenWidth - bannerWidth) / 2;
+    yOffset = screenHeight - bannerHeight;
+
+    CGRect bannerRect = CGRectMake(xOffset, yOffset, bannerWidth, bannerHeight);
+
+    bannerView.frame = bannerRect;
+
+    [self.viewController.view addSubview:bannerView];
+    [self.viewController.view bringSubviewToFront:bannerView];
+
     NSLog(@"%s", __PRETTY_FUNCTION__);
     [self emitWindowEvent:EVENT_BANNER_DID_LOAD];
 }
@@ -312,7 +359,16 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 - (void)showOfferwall:(CDVInvokedUrlCommand *)command
 {
 
-    [IronSource showOfferwallWithViewController:self.viewController];
+    NSString *placement = [command argumentAtIndex:0];
+
+    if( placement == nil || [placement length] == 0)
+    {
+        [IronSource showOfferwallWithViewController:self.viewController];
+    }
+    else
+    {
+        [IronSource showOfferwallWithViewController:self.viewController placement:placement];
+    }
 
     // Send callback successfull
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -404,7 +460,16 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 - (void)showInterstitial:(CDVInvokedUrlCommand *)command
 {
 
-    [IronSource showInterstitialWithViewController:self.viewController];
+    NSString *placement = [command argumentAtIndex:0];
+
+    if( placement == nil || [placement length] == 0)
+    {
+        [IronSource showInterstitialWithViewController:self.viewController];
+    }
+    else
+    {
+        [IronSource showInterstitialWithViewController:self.viewController placement:placement];
+    }
 
     // Send callback successfull
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];

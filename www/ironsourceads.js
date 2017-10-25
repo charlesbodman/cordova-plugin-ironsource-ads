@@ -79,9 +79,9 @@ var IronSourceAds = (function () {
          */
         showRewardedVideo: function showRewardedVideo(params) {
 
-            params = defaults(params, { placement: 'default' });
+            params = defaults(params, { placement: 'DefaultRewardedVideo' });
 
-            callPlugin('showRewardedVideo', [], params.onSuccess, params.onFailure);
+            callPlugin('showRewardedVideo', [params.placement], params.onSuccess, params.onFailure);
 
         },
 
@@ -109,9 +109,9 @@ var IronSourceAds = (function () {
          */
         showBanner: function showBanner(params) {
 
-            params = defaults(params, {});
+            params = defaults(params, { placement: 'DefaultBanner' });
 
-            callPlugin('showBanner', [], params.onSuccess, params.onFailure);
+            callPlugin('showBanner', [params.placement], params.onSuccess, params.onFailure);
 
         },
 
@@ -124,8 +124,7 @@ var IronSourceAds = (function () {
 
             params = defaults(params, {});
 
-            callPlugin('hasOfferwall', [], params.onSuccess, params.onFailure);
-
+            callPlugin('hasOfferwall', [params.placement], params.onSuccess, params.onFailure);
         },
 
 
@@ -135,7 +134,7 @@ var IronSourceAds = (function () {
          */
         showOfferwall: function showOfferwall(params) {
 
-            params = defaults(params, {});
+            params = defaults(params, { placement: 'DefaultOfferWall' });
 
             callPlugin('showOfferwall', [], params.onSuccess, params.onFailure);
 
@@ -147,7 +146,7 @@ var IronSourceAds = (function () {
          */
         loadInterstitial: function loadInterstitial(params) {
 
-            params = defaults(params, {});
+            params = defaults(params, { placement: 'DefaultInterstitial' });
 
             callPlugin('loadInterstitial', [], params.onSuccess, params.onFailure);
 
@@ -176,8 +175,20 @@ var IronSourceAds = (function () {
 
             callPlugin('hasInterstitial', [], params.onSuccess, params.onFailure);
 
-        }
+        },
 
+        /**
+         * Checks if rewarded video is capped for placement.
+         * This should be used before showing the state of the button for rewarded video.
+         * User may have capped their usage
+         */
+        isRewardedVideoCappedForPlacement: function isRewardedVideoCappedForPlacement(params) {
+
+            params = defaults(params, { placement: 'DefaultRewardedVideo' });
+
+            callPlugin('isRewardedVideoCappedForPlacement', [], params.onSuccess, params.onFailure);
+
+        }
 
     }
 })();

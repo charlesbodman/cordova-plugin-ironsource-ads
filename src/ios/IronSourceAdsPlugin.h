@@ -14,6 +14,8 @@
 
 - (void)hasRewardedVideo:(CDVInvokedUrlCommand *)command;
 
+- (void)isRewardedVideoCappedForPlacement:(CDVInvokedUrlCommand *)command;
+
 - (void)showBanner:(CDVInvokedUrlCommand *)command;
 
 - (void)hideBanner:(CDVInvokedUrlCommand *)command;

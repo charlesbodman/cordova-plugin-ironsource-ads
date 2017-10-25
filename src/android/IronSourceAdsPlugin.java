@@ -97,6 +97,11 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             return true;
         }
 
+        else if (action.equals("isRewardedVideoCappedForPlacement")) {
+            this.isRewardedVideoCappedForPlacementAction(args, callbackContext);
+            return true;
+        }
+
         else if (action.equals("showBanner")) {
             this.showBannerAction(args, callbackContext);
             return true;
@@ -215,7 +220,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
                 String userId = providedUserId;
 
-                if(TextUtils.isEmpty(userId)){
+                if (TextUtils.isEmpty(userId)) {
                     userId = advertisingId;
                 }
 
@@ -292,9 +297,12 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     private void showRewardedVideoAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
+        final String placementName = args.getString(0);
+
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                IronSource.showRewardedVideo();
+
+                IronSource.showRewardedVideo(placementName);
                 callbackContext.success();
             }
         });
@@ -305,6 +313,18 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             public void run() {
                 boolean available = IronSource.isRewardedVideoAvailable();
                 callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, available));
+            }
+        });
+    }
+
+    private void isRewardedVideoCappedForPlacementAction(JSONArray args, final CallbackContext callbackContext) {
+
+        final String placementName = args.getString(0);
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                boolean capped = IronSource.isRewardedVideoPlacementCapped(placementName);
+                callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, capped));
             }
         });
     }
@@ -392,9 +412,12 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     }
 
     private void showInterstitialAction(JSONArray args, final CallbackContext callbackContext) {
+
+        final String placementName = args.getString(0);
+
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                IronSource.showInterstitial();
+                IronSource.showInterstitial(placementName);
                 callbackContext.success();
             }
         });
@@ -438,10 +461,12 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     /**----------------------- OFFERWALL --------------------------- */
 
     private void showOfferwallAction(JSONArray args, final CallbackContext callbackContext) {
-        final IronSourceAdsPlugin self = this;
+
+        final String placementName = args.getString(0);
+
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                IronSource.showOfferwall();
+                IronSource.showOfferwall(placementName);
                 callbackContext.success();
             }
         });

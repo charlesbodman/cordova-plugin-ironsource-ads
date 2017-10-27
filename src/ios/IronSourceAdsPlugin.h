@@ -6,6 +6,7 @@
 
 @property (nonatomic, strong) ISBannerView *bannerView;
 @property (nonatomic) bool loadingBanner;
+@property (nonatomic) NSString *bannerPosition;
 
 - (void)init:(CDVInvokedUrlCommand *)command;
 

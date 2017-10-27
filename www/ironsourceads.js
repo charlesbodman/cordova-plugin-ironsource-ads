@@ -105,13 +105,15 @@ var IronSourceAds = (function () {
 
         /**
          * Shows banner if avaialble
+         * @param {string} params.placement
+         * @param {string} params.position
          * @param {Function} params.onSuccess
          */
         showBanner: function showBanner(params) {
 
-            params = defaults(params, { placement: 'DefaultBanner' });
+            params = defaults(params, { placement: 'DefaultBanner', position: 'bottom', size: 'standard' });
 
-            callPlugin('showBanner', [params.placement], params.onSuccess, params.onFailure);
+            callPlugin('showBanner', [params.placement, params.size, params.position], params.onSuccess, params.onFailure);
 
         },
 
@@ -120,7 +122,7 @@ var IronSourceAds = (function () {
          * @param {Function} [params.onSuccess]
          * @param {Function} [params.onFailure]
          */
-        hideBanner: function hideBanner(params){
+        hideBanner: function hideBanner(params) {
 
             params = defaults(params, {});
 

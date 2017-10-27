@@ -68,7 +68,10 @@ IronSourceAds.init({
 ```
 
 ### Validate Integration
-Once you have finished your integration, call the following function and confirm that everything in your integration is marked as **VERIFIED**:
+Once you have finished your integration, call the following function and confirm you have integrated the ad networks you want are marked **VERIFIED**:
+
+*If they are not marked verified, look at the [Adding Additional AD Network SDKs](#adding-additional-sdks) section for help or the [Official IronSource Documentation](http://developers.ironsrc.com/)*
+
 
 ```javascript
 IronSourceAds.validateIntegration();

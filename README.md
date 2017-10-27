@@ -119,7 +119,10 @@ Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
   - [Has Offerwall](#has-offerwall)
   - [Show Offerwall](#show-offerwall)
   - [Offerwall Events](#offerwall-events)
-  
+- [Banners](#banners)
+  - [Show Banner](#show-banner)
+  - [Hide Banner](#hide-banner)
+  - [Banner Events](#banner-events)
   
 All methods support optional `onSuccess` and `onFailure` parameters
 
@@ -163,6 +166,15 @@ IronSourceAds.hasRewardedVideo({
 #### Show Rewarded Video
 ```javascript
 IronSourceAds.showRewardedVideo();
+```
+
+**Show Rewarded Video (With options)**
+```javascript
+IronSourceAds.showRewardedVideo({ 
+    placement: "placementName", // Optional
+    onSuccess: function () { }, // Optional 
+    onFailure: function (error) { } //Optional
+});
 ```
 
 #### Rewarded Video Events
@@ -233,10 +245,20 @@ _Must be called before `showInterstitial`
 ```javascript
 IronSourceAds.loadInterstitial();
 ```
+
 ***
 #### Show Interstitial
 ```javascript
 IronSourceAds.showInterstitial();
+```
+
+**Show Interstitial Video (With options)**
+```javascript
+IronSourceAds.showInterstitial({ 
+    placement: "placementName", // Optional 
+    onSuccess: function () { }, // Optional
+    onFailure: function (error) { } // Optional 
+});
 ```
 ***
 #### Interstitial Events
@@ -302,6 +324,15 @@ IronSourceAds.hasOfferwall({
 IronSourceAds.showOfferwall();
 ```
 
+**Show Offerwall (With options)**
+```javascript
+IronSourceAds.showOfferwall({ 
+    placement: "placementName", // Optional
+    onSuccess: function () { }, // Optional
+    onFailure: function (error) { } // Optional
+});
+```
+
 #### Offerwall Events
 
 **Offerwall Availability Changed**
@@ -341,6 +372,73 @@ window.addEventListener("offerwallClosed", function(){
 **Offerwall Show Failed**
 ```javascript
 window.addEventListener("offerwallShowFailed", function(){
+
+});
+```
+
+
+
+### Banners
+
+
+#### Show Banner
+```javascript
+IronSourceAds.showBanner();
+```
+
+**Show Banner (With options)**
+```javascript
+IronSourceAds.showBanner({ 
+    placement: "placementName", // Optional
+    onSuccess: function () { }, // Optional
+    onFailure: function (error) { } // Optional
+});
+```
+
+### Hide Banner
+```javascript
+IronSourceAds.hideBanner();
+```
+
+
+#### Banner Events
+
+
+**Banner Did Load**
+```javascript
+window.addEventListener("bannerDidLoad", function(event){
+
+});
+```
+
+**Banner Failed to Load**
+```javascript
+window.addEventListener("bannerFailedToLoad", function(error){
+
+});
+```
+
+**Banner Did Click**
+```javascript
+window.addEventListener("bannerDidClick");
+```
+
+**Banner Will Present Screen**
+```javascript
+window.addEventListener("bannerWillPresentScreen", function(){
+
+});
+```
+
+**Banner Did Dismiss Screen**
+```javascript
+window.addEventListener("bannerDidDismissScreen", function(){
+
+});
+```
+**Banner will leave application**
+```javascript
+window.addEventListener("bannerWillLeaveApplication", function(){
 
 });
 ```

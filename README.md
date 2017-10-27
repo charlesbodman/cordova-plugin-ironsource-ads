@@ -12,8 +12,8 @@
 
 - [State of Development](#state-of-development)
 - [Install](#install)
-- [API](#usage)
-- [Adding Additional AD Networks](#adding-additional-sdks)
+- [API](#api)
+- [Adding Additional AD Network SDKs](#adding-additional-sdks)
 - [Official IronSource Documentation](http://developers.ironsrc.com/)
 
 

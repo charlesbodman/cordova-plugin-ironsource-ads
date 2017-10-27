@@ -12,7 +12,7 @@
 
 - [State of Development](#state-of-development)
 - [Install](#install)
-- [Usage](#usage)
+- [API](#usage)
 - [Adding Additional AD Networks](#adding-additional-sdks)
 - [Official IronSource Documentation](http://developers.ironsrc.com/)
 
@@ -35,7 +35,7 @@ cordova plugin add cordova-plugin-ironsource-ads
 ```
 
 -------- 
-## Usage
+## API
 
 - [Initialization](#initialization)
 - [Validate Integration](#validate-integration)

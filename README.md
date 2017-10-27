@@ -22,8 +22,8 @@
 - [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=Offerwall%20Support&style=flat-square">
 - [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=Interstitial%20Support&style=flat-square">
 - [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Banner%20Support&style=flat-square">
-  - [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=IOS%20Banner%20Support&style=flat-square">
-  - [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Andorid%20Banner%20Support&style=flat-square">
+- [x] <img src="https://img.shields.io/badge/-Complete-brightgreen.svg?label=IOS%20Banner%20Support&style=flat-square">
+- [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Andorid%20Banner%20Support&style=flat-square">
 
 
 -------- 

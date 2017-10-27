@@ -13,6 +13,7 @@
 - [State of Development](#state-of-development)
 - [Install](#install)
 - [Usage](#usage)
+- [Adding Additional AD Networks](#adding-additional-sdks)
 - [Official IronSource Documentation](http://developers.ironsrc.com/)
 
 
@@ -31,76 +32,6 @@
 
 ```bash
 cordova plugin add cordova-plugin-ironsource-ads
-```
-**By default this plugin does not contain ad mediator sdks**
-
-## Adding Additional SDKS
-**By default, this plugin does not contain other ad providers sdks**
-
-### Android
-
-Edit `src/android/ironsourceads.gradle` from this plugin and uncomment 
-```java
-  dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.0@jar'
-
-    // Uncomment required mediation adapters
-
-    // compile 'com.ironsource.adapters:adcolonyadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:admobadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:applovinadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:chartboostadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:facebookadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:hyprmxadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:inmobiadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:mediabrixadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:millennialmediaadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:mopubadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:tapjoyadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:unityadsadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:vungleadapter:4.0.0@jar'
-  }
-```
-
-### IOS
-**IOS requires manual downloading of Adapter & SDK**
-[Download Adapters Here](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
-
-**Edit `plugin.xml` of this plugin**
-
-```xml
-   <platform name="ios">
-        <config-file target="config.xml" parent="/*">
-            <feature name="IronSourceAdsPlugin">
-                <param name="ios-package" value="IronSourceAdsPlugin" />
-            </feature>
-        </config-file>
-        <header-file src="src/ios/IronSourceAdsPlugin.h" />
-        <source-file src="src/ios/IronSourceAdsPlugin.m" />
-        <framework src="src/ios/IronSource.framework" custom="true" />
-
-        <!-- ADD MEDIATION FRAMEWORKS HERE -->
-        <!-- Example -->
-        <framework src="ISAdColonyAdapter.framework" custom="true" />
-        <framework src="ISAdMobAdapter.framework" custom="true" />
-        <!-- Example -->
-
-        <framework src="Foundation.framework" />
-        <framework src="AVFoundation.framework" />
-        <framework src="CoreMedia.framework" />
-        <framework src="CoreVideo.framework" />
-        <framework src="QuartzCore.framework" />
-        <framework src="SystemConfiguration.framework" />
-        <framework src="CoreGraphics.framework" />
-        <framework src="CFNetwork.framework" />
-        <framework src="MobileCoreServices.framework" />
-        <framework src="libz.dylib" />
-        <framework src="StoreKit.framework" />
-        <framework src="AdSupport.framework" />
-        <framework src="CoreLocation.framework" />
-        <framework src="CoreTelephony.framework" />
-        <framework src="Security.framework" />
-    </platform>
 ```
 
 -------- 
@@ -383,6 +314,7 @@ window.addEventListener("offerwallShowFailed", function(){
 
 ### Banners
 
+*Banner ads require Admob, Facebook, or InMobi integrated to work*
 
 #### Show Banner
 ```javascript
@@ -446,4 +378,77 @@ window.addEventListener("bannerDidDismissScreen", function(){
 window.addEventListener("bannerWillLeaveApplication", function(){
 
 });
+```
+
+
+
+# Adding Additional SDKS
+**By default, this plugin does not contain other ad providers sdks**
+
+### Android
+
+Edit `src/android/ironsourceads.gradle` from this plugin and uncomment 
+```java
+  dependencies {
+    compile 'com.ironsource.sdk:mediationsdk:6.7.0@jar'
+
+    // Uncomment required mediation adapters
+
+    // compile 'com.ironsource.adapters:adcolonyadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:admobadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:applovinadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:chartboostadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:facebookadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:hyprmxadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:inmobiadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:mediabrixadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:millennialmediaadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:mopubadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:tapjoyadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:unityadsadapter:4.0.0@jar'
+    // compile 'com.ironsource.adapters:vungleadapter:4.0.0@jar'
+  }
+```
+
+### IOS
+**IOS requires manual downloading of Adapter & SDK**
+[Download Adapters Here](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
+
+*If you have any questions, create an issue, and I'll walk you through it. *
+
+**Edit `plugin.xml` of this plugin**
+
+```xml
+   <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IronSourceAdsPlugin">
+                <param name="ios-package" value="IronSourceAdsPlugin" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/IronSourceAdsPlugin.h" />
+        <source-file src="src/ios/IronSourceAdsPlugin.m" />
+        <framework src="src/ios/IronSource.framework" custom="true" />
+
+        <!-- ADD MEDIATION FRAMEWORKS HERE -->
+        <!-- Example -->
+        <framework src="src/ios/ISAdColonyAdapter.framework" custom="true" />
+        <framework src="src/ios/ISAdMobAdapter.framework" custom="true" />
+        <!-- Example -->
+
+        <framework src="Foundation.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CFNetwork.framework" />
+        <framework src="MobileCoreServices.framework" />
+        <framework src="libz.dylib" />
+        <framework src="StoreKit.framework" />
+        <framework src="AdSupport.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="Security.framework" />
+    </platform>
 ```

@@ -13,7 +13,7 @@ cdvPluginPostBuildExtras.add({
   }
 
   dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.0@jar'
+    compile 'com.ironsource.sdk:mediationsdk:6.7.1@jar'
 
     // Uncomment required mediation adapters
 

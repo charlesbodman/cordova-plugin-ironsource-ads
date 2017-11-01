@@ -3,7 +3,7 @@
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">
-<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.0-blue.svg?style=flat-square">
+<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.1-blue.svg?style=flat-square">
 </p>
 
 --------
@@ -26,7 +26,7 @@
 - [ ] <img src="https://img.shields.io/badge/-In%20Development-yellow.svg?label=Andorid%20Banner%20Support&style=flat-square">
 
 
--------- 
+--------
 
 ## Install
 
@@ -34,7 +34,7 @@
 cordova plugin add cordova-plugin-ironsource-ads
 ```
 
--------- 
+--------
 ## API
 
 - [Initialization](#initialization)
@@ -57,7 +57,7 @@ cordova plugin add cordova-plugin-ironsource-ads
   - [Show Banner](#show-banner)
   - [Hide Banner](#hide-banner)
   - [Banner Events](#banner-events)
-  
+
 All methods support optional `onSuccess` and `onFailure` parameters
 
 ### Initialization
@@ -107,9 +107,9 @@ IronSourceAds.showRewardedVideo();
 
 **Show Rewarded Video (With options)**
 ```javascript
-IronSourceAds.showRewardedVideo({ 
+IronSourceAds.showRewardedVideo({
     placement: "placementName", // Optional
-    onSuccess: function () { }, // Optional 
+    onSuccess: function () { }, // Optional
     onFailure: function (error) { } //Optional
 });
 ```
@@ -122,7 +122,7 @@ IronSourceAds.showRewardedVideo({
 window.addEventListener("rewardedVideoAvailabilityChanged", function(event){
 
     var available = event.available;
-    
+
 });
 ```
 **Rewarded Video Rewarded**
@@ -133,7 +133,7 @@ window.addEventListener("rewardedVideoRewardReceived", function(event){
     var placementName = placement.placementName;
     var rewardAmount = placement.rewardAmount;
     var rewardName = placement.rewardName;
-    
+
 });
 ```
 **Rewarded Video Started**
@@ -191,10 +191,10 @@ IronSourceAds.showInterstitial();
 
 **Show Interstitial Video (With options)**
 ```javascript
-IronSourceAds.showInterstitial({ 
-    placement: "placementName", // Optional 
+IronSourceAds.showInterstitial({
+    placement: "placementName", // Optional
     onSuccess: function () { }, // Optional
-    onFailure: function (error) { } // Optional 
+    onFailure: function (error) { } // Optional
 });
 ```
 ***
@@ -263,7 +263,7 @@ IronSourceAds.showOfferwall();
 
 **Show Offerwall (With options)**
 ```javascript
-IronSourceAds.showOfferwall({ 
+IronSourceAds.showOfferwall({
     placement: "placementName", // Optional
     onSuccess: function () { }, // Optional
     onFailure: function (error) { } // Optional
@@ -288,10 +288,10 @@ window.addEventListener("offerwallShown", function(){
 **Offerwall Credit Recieved**
 ```javascript
 window.addEventListener("offerwallCreditReceived", function(event){
-  
+
   var credits = event.credits; // The number of credits the user has earned since //the last (void)didReceiveOfferwallCredits:
   var totalCredits = event.totalCredits; //The total number of credits ever earned by the user
-  
+
 });
 ```
 **Offerwall Credit Failed**
@@ -326,7 +326,7 @@ IronSourceAds.showBanner();
 
 **Show Banner (With options)**
 ```javascript
-IronSourceAds.showBanner({ 
+IronSourceAds.showBanner({
     placement: "placementName", // Optional
     size:"standard", // Optional ("standard","large","rectangle","tablet")
     position:"bottom", //Optional ("top", "bottom", "center"),
@@ -390,7 +390,7 @@ window.addEventListener("bannerWillLeaveApplication", function(){
 
 ### Android
 
-Edit `src/android/ironsourceads.gradle` from this plugin and uncomment 
+Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
 ```java
   dependencies {
     compile 'com.ironsource.sdk:mediationsdk:6.7.0@jar'

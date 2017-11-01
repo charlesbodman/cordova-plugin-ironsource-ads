@@ -35,6 +35,7 @@
 @property (nonatomic, strong)   NSString            *mediationType;
 @property (nonatomic, strong)   NSNumber            *serr;
 @property (nonatomic, strong)   NSString            *categorizeType;
+@property (nonatomic, strong)   NSDictionary        *rvServerParams;
 
 /*!
  @deprecated This method has been deprecated and will be removed in a future version

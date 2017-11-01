@@ -256,6 +256,21 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
         [self emitWindowEvent:EVENT_REWARDED_VIDEO_ENDED];
     }
 
+    //Invoked when the end user clicked on the RewardedVideo ad
+- (void)didClickRewardedVideo:(ISPlacementInfo *)placementInfo
+    {
+
+    }
+
+    // This method gets invoked when the video has stopped playing.
+- (void)rewardedVideoDidEnd
+    {
+        NSLog(@"%s", __PRETTY_FUNCTION__);
+        [self emitWindowEvent:EVENT_REWARDED_VIDEO_ENDED];
+    }
+
+
+
 #pragma mark - Banner Delegate Functions
 
     // Show banner

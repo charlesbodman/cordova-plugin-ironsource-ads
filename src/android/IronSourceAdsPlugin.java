@@ -391,6 +391,11 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         this.emitWindowEvent(EVENT_REWARDED_VIDEO_FAILED, createErrorJSON(ironSourceError));
     }
 
+    @Override
+    public void onRewardedVideoAdClicked(Placement placement) {
+
+    }
+
     /**----------------------- INTERSTITIAL --------------------------- */
 
     private void hasInterstitialAction(JSONArray args, final CallbackContext callbackContext) {

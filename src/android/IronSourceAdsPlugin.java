@@ -317,7 +317,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         });
     }
 
-    private void isRewardedVideoCappedForPlacementAction(JSONArray args, final CallbackContext callbackContext) {
+    private void isRewardedVideoCappedForPlacementAction(JSONArray args, final CallbackContext callbackContext)
+            throws JSONException {
 
         final String placementName = args.getString(0);
 
@@ -416,7 +417,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         });
     }
 
-    private void showInterstitialAction(JSONArray args, final CallbackContext callbackContext) {
+    private void showInterstitialAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
         final String placementName = args.getString(0);
 
@@ -465,7 +466,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     /**----------------------- OFFERWALL --------------------------- */
 
-    private void showOfferwallAction(JSONArray args, final CallbackContext callbackContext) {
+    private void showOfferwallAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
         final String placementName = args.getString(0);
 

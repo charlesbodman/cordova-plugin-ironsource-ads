@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-ironsource-ads",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Ironsource ads for cordova based development",
   "repository": {
     "type": "git",

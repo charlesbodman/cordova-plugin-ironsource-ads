@@ -161,7 +161,7 @@ var IronSourceAds = (function () {
          */
         loadInterstitial: function loadInterstitial(params) {
 
-            params = defaults(params, { placement: 'DefaultInterstitial' });
+            params = defaults(params, {});
 
             callPlugin('loadInterstitial', [], params.onSuccess, params.onFailure);
 

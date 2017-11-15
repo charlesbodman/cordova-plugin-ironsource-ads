@@ -3,6 +3,9 @@ package com.charlesbodman.cordova.plugin.ironsource;
 import android.util.Log;
 import android.text.TextUtils;
 import android.os.AsyncTask;
+import android.view.Gravity;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.RelativeLayout;
 import android.widget.FrameLayout;
 
 import org.apache.cordova.CallbackContext;
@@ -64,6 +67,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     private static final String EVENT_BANNER_WILL_LEAVE_APPLICATION = "bannerWillLeaveApplication";
 
     private IronSourceBannerLayout mIronSourceBannerLayout;
+
+    private RelativeLayout bannerContainerLayout;
 
     private CordovaWebView cordovaWebView;
 
@@ -549,6 +554,11 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
             public void run() {
 
+                if (mIronSourceBannerLayout != null) {
+                    IronSource.destroyBanner(mIronSourceBannerLayout);
+                    mIronSourceBannerLayout = null;
+                }
+
                 // choose banner size
                 EBannerSize size = EBannerSize.BANNER;
 
@@ -558,12 +568,22 @@ public class IronSourceAdsPlugin extends CordovaPlugin
                 // layout
                 parentLayout = (FrameLayout) cordovaWebView.getView().getParent();
 
-                // layout params
-                FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
-                        FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT);
+                bannerContainerLayout = new RelativeLayout(self.cordova.getActivity());
 
-                //Add add banner layout to cordova view
-                parentLayout.addView(mIronSourceBannerLayout, 0, layoutParams);
+                RelativeLayout.LayoutParams bannerContainerLayoutParams = new RelativeLayout.LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+
+                bannerContainerLayout.setGravity(Gravity.BOTTOM);
+
+                // layout params
+                RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                        RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+
+                layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+
+                bannerContainerLayout.addView(mIronSourceBannerLayout, layoutParams);
+
+                parentLayout.addView(bannerContainerLayout, bannerContainerLayoutParams);
 
                 if (mIronSourceBannerLayout != null) {
 
@@ -615,12 +635,24 @@ public class IronSourceAdsPlugin extends CordovaPlugin
      */
     private void hideBannerAction(JSONArray args, final CallbackContext callbackContext) {
 
-        IronSource.destroyBanner(mIronSourceBannerLayout);
-        if (parentLayout != null) {
-            parentLayout.removeView(mIronSourceBannerLayout);
-        }
+        cordova.getActivity().runOnUiThread(new Runnable() {
 
-        callbackContext.success();
-    }
+            public void run() {
+
+                if (mIronSourceBannerLayout != null) {
+                    IronSource.destroyBanner(mIronSourceBannerLayout);
+                }
+
+                bannerContainerLayout.removeView(mIronSourceBannerLayout);
+
+                if (parentLayout != null) {
+                    parentLayout.removeView(bannerContainerLayout);
+                }
+
+                callbackContext.success();
+
+            }
+        });
+    };
 
 }

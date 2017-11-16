@@ -554,10 +554,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
             public void run() {
 
-                if (mIronSourceBannerLayout != null) {
-                    IronSource.destroyBanner(mIronSourceBannerLayout);
-                    mIronSourceBannerLayout = null;
-                }
+                hideBannerView();
 
                 // choose banner size
                 EBannerSize size = EBannerSize.BANNER;
@@ -630,6 +627,22 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     }
 
+
+    private void hideBannerView(){
+        if (mIronSourceBannerLayout != null) {
+
+            IronSource.destroyBanner(mIronSourceBannerLayout);
+            if(parentLayout != null && bannerContainerLayout != null)
+            {
+                bannerContainerLayout.removeView(mIronSourceBannerLayout);
+                parentLayout.removeView(bannerContainerLayout);
+                bannerContainerLayout = null;
+                parentLayout = null;
+            }
+            mIronSourceBannerLayout = null;
+        }
+    }
+
     /**
      * Destroys IronSource Banner and removes it from the container
      */
@@ -638,19 +651,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         cordova.getActivity().runOnUiThread(new Runnable() {
 
             public void run() {
-
-                if (mIronSourceBannerLayout != null) {
-                    IronSource.destroyBanner(mIronSourceBannerLayout);
-                }
-
-                bannerContainerLayout.removeView(mIronSourceBannerLayout);
-
-                if (parentLayout != null) {
-                    parentLayout.removeView(bannerContainerLayout);
-                }
-
+                hideBannerView();
                 callbackContext.success();
-
             }
         });
     };

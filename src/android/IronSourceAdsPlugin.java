@@ -114,6 +114,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
         else if (action.equals("hideBanner")) {
             this.hideBannerAction(args, callbackContext);
+            return true;
         }
 
         else if (action.equals("hasOfferwall")) {

@@ -26,12 +26,12 @@
           <!-- ADD MEDIATION PERMISSIONS HERE -->
 
             <!--Requested by Applovin + HyperMX + Vungle -->
-            <uses-permission
+            <!-- <uses-permission
                 android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-                android:maxSdkVersion="18" />
+                android:maxSdkVersion="18" /> -->
 
             <!--Requested by Flurry -->
-            <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+            <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
 
             <meta-data
                 android:name="com.google.android.gms.version"
@@ -60,7 +60,7 @@
                 android:hardwareAccelerated="true"
                 android:theme="@android:style/Theme.Translucent" />
 
-            <!-- AdColony -->
+            <!-- AdColony
             <activity
                 android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize"
@@ -71,7 +71,7 @@
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:hardwareAccelerated="true" />
 
-            <!-- Vungle -->
+            <!-- Vungle
             <activity
                 android:name="com.vungle.publisher.VideoFullScreenAdActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
@@ -82,12 +82,12 @@
                 android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
 
-            <!-- AppLovin -->
+            <!-- AppLovin
             <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"  android:configChanges="orientation|screenSize"/>
 
             <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" />
 
-            <!-- UnityAds-->
+            <!-- UnityAds
             <activity
                 android:name="com.unity3d.ads.adunit.AdUnitActivity"
                 android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
@@ -99,7 +99,7 @@
                 android:hardwareAccelerated="false"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-            <!-- Chartboost-->
+            <!-- Chartboost
             <activity
                 android:name="com.chartboost.sdk.CBImpressionActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize"
@@ -107,7 +107,7 @@
                 android:hardwareAccelerated="true"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-            <!-- HyprMx-->
+            <!-- HyprMx
             <activity
                 android:name="com.ironsource.adapters.hyprmx.MediationHMXActivity"
                 android:configChanges="orientation|screenSize|keyboardHidden|keyboard|smallestScreenSize|uiMode|fontScale|screenLayout|locale">
@@ -134,7 +134,7 @@
                 android:configChanges="keyboardHidden|orientation|screenSize"
                 android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 
-            <!-- InMobi-->
+            <!-- InMobi
             <activity
                 android:name="com.inmobi.rendering.InMobiAdActivity"
                 android:configChanges="keyboardHidden|orientation|keyboard|smallestScreenSize|screenSize|screenLayout"
@@ -154,7 +154,7 @@
                 android:name="com.inmobi.signals.activityrecognition.ActivityRecognitionManager"
                 android:enabled="true" />
 
-            <!-- TapJoy -->
+            <!-- TapJoy
             <activity
                 android:name="com.tapjoy.TJAdUnitActivity"
                 android:configChanges="orientation|keyboardHidden|screenSize"
@@ -172,13 +172,13 @@
                 android:hardwareAccelerated="true"
                 android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-            <!-- AdMob -->
+            <!-- AdMob
             <activity
                 android:name="com.google.android.gms.ads.AdActivity"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
                 android:theme="@android:style/Theme.Translucent" />
 
-            <!-- MediaBrix -->
+            <!-- MediaBrix
             <activity
                 android:name="com.mediabrix.android.service.AdViewActivity"
                 android:configChanges="orientation|screenSize|keyboard"
@@ -186,12 +186,13 @@
             <service android:name="com.mediabrix.android.service.MediaBrixService" />
 
 
-            <!-- Facebook -->
+            <!-- Facebook -
             <activity android:name="com.facebook.ads.InterstitialAdActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize" />
 
             <activity android:name="com.facebook.ads.AudienceNetworkActivity"
                 android:configChanges="keyboardHidden|orientation|screenSize" />
+            -->
 
 
         </config-file>

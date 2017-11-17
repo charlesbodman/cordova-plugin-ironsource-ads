@@ -390,6 +390,8 @@ window.addEventListener("bannerWillLeaveApplication", function(){
 
 ### Android
 
+[Follow the integration guides here](https://developers.ironsrc.com/ironsource-mobile/android/android-sdk/#step-2)
+
 Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
 ```java
   dependencies {
@@ -415,7 +417,7 @@ Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
 
 ### IOS
 **IOS requires manual downloading of Adapter & SDK**
-[Download Adapters Here](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
+[Download Adapters Here and follow the integration guides](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2) 
 
 *If you have any questions, create an issue, and I'll walk you through it. *
 

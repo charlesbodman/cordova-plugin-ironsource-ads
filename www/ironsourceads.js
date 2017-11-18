@@ -139,7 +139,7 @@ var IronSourceAds = (function () {
 
             params = defaults(params, {});
 
-            callPlugin('hasOfferwall', [params.placement], params.onSuccess, params.onFailure);
+            callPlugin('hasOfferwall', [], params.onSuccess, params.onFailure);
         },
 
 
@@ -151,7 +151,7 @@ var IronSourceAds = (function () {
 
             params = defaults(params, { placement: 'DefaultOfferWall' });
 
-            callPlugin('showOfferwall', [], params.onSuccess, params.onFailure);
+            callPlugin('showOfferwall', [params.placement], params.onSuccess, params.onFailure);
 
         },
 

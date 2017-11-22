@@ -232,7 +232,7 @@ window.addEventListener("interstitialClosed", function(){
 ```
 **Interstitial Will Open**
 ```javascript
-window.addEventListener("interstitialClosed", function(){
+window.addEventListener("interstitialWillOpen", function(){
 
 });
 ```

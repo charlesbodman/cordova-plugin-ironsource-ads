@@ -6,30 +6,7 @@ cdvPluginPostBuildExtras.add({
     }
   }
 
-  repositories {
-    maven {
-      url "http://dl.bintray.com/ironsource-mobile/android-adapters"
-    }
-  }
-
   dependencies {
     compile 'com.ironsource.sdk:mediationsdk:6.7.1@jar'
-
-    // Uncomment required mediation adapters
-
-    // compile 'com.ironsource.adapters:adcolonyadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:admobadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:applovinadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:chartboostadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:facebookadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:hyprmxadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:inmobiadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:mediabrixadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:millennialmediaadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:mopubadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:tapjoyadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:unityadsadapter:4.0.0@jar'
-    // compile 'com.ironsource.adapters:vungleadapter:4.0.0@jar'
-
   }
 });

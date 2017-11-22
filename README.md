@@ -393,7 +393,23 @@ window.addEventListener("bannerWillLeaveApplication", function(){
 [Follow the integration guides here](https://developers.ironsrc.com/ironsource-mobile/android/android-sdk/#step-2)
 
 Edit `src/android/ironsourceads.gradle` from this plugin and add the mediation adapters you need
+
+*Example*
 ```java
+cdvPluginPostBuildExtras.add({
+
+  repositories {
+    maven {
+      url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+    }
+  }
+
+  repositories {
+    maven {
+      url "http://dl.bintray.com/ironsource-mobile/android-adapters"
+    }
+  }
+
   dependencies {
     compile 'com.ironsource.sdk:mediationsdk:6.7.3@jar'
 
@@ -402,6 +418,8 @@ Edit `src/android/ironsourceads.gradle` from this plugin and add the mediation a
     compile 'com.ironsource.adapters:facebookadapter:4.0.2@jar'
     compile 'com.ironsource.adapters:unityadsadapter:4.0.1@jar'
   }
+});
+
 ```
 
 ### IOS

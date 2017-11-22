@@ -3,7 +3,7 @@
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">
-<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.1-blue.svg?style=flat-square">
+<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.3-blue.svg?style=flat-square">
 </p>
 
 --------
@@ -232,7 +232,7 @@ window.addEventListener("interstitialClosed", function(){
 ```
 **Interstitial Will Open**
 ```javascript
-window.addEventListener("interstitialClosed", function(){
+window.addEventListener("interstitialWillOpen", function(){
 
 });
 ```
@@ -417,7 +417,7 @@ Edit `src/android/ironsourceads.gradle` from this plugin and uncomment
 
 ### IOS
 **IOS requires manual downloading of Adapter & SDK**
-[Download Adapters Here and follow the integration guides](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2) 
+[Download Adapters Here and follow the integration guides](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
 
 *If you have any questions, create an issue, and I'll walk you through it. *
 

@@ -8,9 +8,9 @@
     </js-module>
 
     <engines>
-        <engine name="cordova" version=">=3.0" />
+        <engine name="cordova" version=">=6.3.0" />
         <engine name="cordova-android" version=">=4.0.0" />
-        <engine name="cordova-ios" version=">=4.0.0" />
+        <engine name="cordova-ios" version=">=4.3.0" />
     </engines>
 
     <platform name="android">
@@ -77,7 +77,7 @@
         </config-file>
         <header-file src="src/ios/IronSourceAdsPlugin.h" />
         <source-file src="src/ios/IronSourceAdsPlugin.m" />
-        <framework src="src/ios/IronSource.framework" custom="true" />
+        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.3.1" />
 
         <!-- ADD MEDIATION FRAMEWORKS HERE -->
         <!-- Example -->

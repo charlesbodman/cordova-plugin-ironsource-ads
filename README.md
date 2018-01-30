@@ -3,7 +3,7 @@
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">
-<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.3-blue.svg?style=flat-square">
+<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.6.0-blue.svg?style=flat-square">
 </p>
 
 --------
@@ -54,6 +54,7 @@ cordova plugin add cordova-plugin-ironsource-ads
   - [Show Offerwall](#show-offerwall)
   - [Offerwall Events](#offerwall-events)
 - [Banners](#banners)
+  - [Load Banner](#load-banner)
   - [Show Banner](#show-banner)
   - [Hide Banner](#hide-banner)
   - [Banner Events](#banner-events)
@@ -318,6 +319,11 @@ window.addEventListener("offerwallShowFailed", function(){
 ### Banners
 
 *Banner ads require Admob, Facebook, or InMobi integrated to work*
+
+#### Load Banner
+```javascript
+IronSourceAds.loadBanner();
+```
 
 #### Show Banner
 ```javascript

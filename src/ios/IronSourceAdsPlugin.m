@@ -64,6 +64,8 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
             userId = USERID;
         }
 
+        self.bannerController = [[UIViewController alloc] init];
+
         // After setting the delegates you can go ahead and initialize the SDK.
         [IronSource setUserId:userId];
 
@@ -111,6 +113,24 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
         NSString *js = [NSString stringWithFormat:@"cordova.fireWindowEvent('%@', %@)", event, jsonString];
         [self.commandDelegate evalJs:js];
     }
+
+- (void)listSubviewsOfView:(UIView *)view {
+
+    // Get the subviews of the view
+    NSArray *subviews = [view subviews];
+
+    // Return if there are no subviews
+    if ([subviews count] == 0) return; // COUNT CHECK LINE
+
+    for (UIView *subview in subviews) {
+
+        // Do what you want to do with the subview
+        NSLog(@"%@", subview);
+
+        // List the subviews of subview
+        [self listSubviewsOfView:subview];
+    }
+}
 
     /**
      * Validates integration
@@ -263,49 +283,59 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     }
 
 
+- (void)loadBanner:(CDVInvokedUrlCommand *)command
+{
+    NSString *placement = [command argumentAtIndex:0];
+    NSString *size = [command argumentAtIndex:1];
+    NSString *position = [command argumentAtIndex:2];
+    NSInteger adSize = IS_AD_SIZE_BANNER;
+
+    // We call destroy banner before loading a new banner
+    if (self.bannerView) {
+        [self destroyBanner];
+    }
+
+    self.loadingBanner = true;
+
+    if([size isEqualToString:@"large"])
+    {
+        adSize = IS_AD_SIZE_LARGE_BANNER;
+    }
+    else if([size isEqualToString:@"rectangle"])
+    {
+        adSize = IS_AD_SIZE_RECTANGLE_BANNER;
+    }
+    else if([size isEqualToString:@"tablet"])
+    {
+        adSize = IS_AD_SIZE_LARGE_BANNER;
+    }
+
+    self.bannerPosition = position;
+
+    if( placement == nil || [placement length] == 0)
+    {
+        [IronSource loadBannerWithViewController:self.bannerController size:adSize];
+    }
+    else
+    {
+        [IronSource loadBannerWithViewController:self.bannerController size:adSize placement:placement];
+    }
+
+    // Send callback successfull
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
 
 #pragma mark - Banner Delegate Functions
 
     // Show banner
 - (void)showBanner:(CDVInvokedUrlCommand *)command
     {
-        NSString *placement = [command argumentAtIndex:0];
-        NSString *size = [command argumentAtIndex:1];
-        NSString *position = [command argumentAtIndex:2];
-        NSInteger adSize = IS_AD_SIZE_BANNER;
-
-        // We call destroy banner before loading a new banner
-        if (self.bannerView) {
-            [self destroyBanner];
-        }
-
-        if([size isEqualToString:@"large"])
+        if(self.bannerView)
         {
-            adSize = IS_AD_SIZE_LARGE_BANNER;
+            [self.viewController.view addSubview:self.bannerView];
+            [self.viewController.view bringSubviewToFront:self.bannerView];
         }
-        else if([size isEqualToString:@"rectangle"])
-        {
-            adSize = IS_AD_SIZE_RECTANGLE_BANNER;
-        }
-        else if([size isEqualToString:@"tablet"])
-        {
-            adSize = IS_AD_SIZE_TABLET_BANNER;
-        }
-
-        self.bannerPosition = position;
-
-        self.loadingBanner = true;
-
-
-        if( placement == nil || [placement length] == 0)
-        {
-            [IronSource loadBannerWithViewController:self.viewController size:adSize];
-        }
-        else
-        {
-            [IronSource loadBannerWithViewController:self.viewController size:adSize placement:placement];
-        }
-
 
         // Send callback successfull
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -314,7 +344,10 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
 - (void)hideBanner:(CDVInvokedUrlCommand *)command
     {
-        [self destroyBanner];
+        if(self.bannerView)
+        {
+            [self.bannerView removeFromSuperview];
+        }
 
         // Send callback successfull
         CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -323,14 +356,11 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
 - (void)destroyBanner
     {
-        self.loadingBanner = false;
-
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (self.bannerView) {
-                [IronSource destroyBanner:self.bannerView];
-                self.bannerView = nil;
-            }
-        });
+        if (self.bannerView) {
+            self.loadingBanner = false;
+            [IronSource destroyBanner:self.bannerView];
+            self.bannerView = nil;
+        }
     }
 
     // Banner dismissed screen
@@ -344,6 +374,8 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 - (void)bannerDidFailToLoadWithError:(NSError *)error
     {
 
+        self.loadingBanner = false;
+
         NSLog(@"%s", __PRETTY_FUNCTION__);
 
         NSDictionary *data = @{
@@ -353,12 +385,25 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
                                        }
                                };
 
+
+        for (UIView *subUIView in self.bannerController.view.subviews ) {
+            [subUIView removeFromSuperview];
+        }
+
+        [self listSubviewsOfView:self.bannerController.view];
+
+
         [self emitWindowEvent:EVENT_BANNER_FAILED_TO_LOAD withData:data];
     }
 
 - (void)bannerDidLoad:(ISBannerView *)bannerView
     {
         if(self.loadingBanner == true){
+
+        // We call destroy banner before loading a new banner
+            if (self.bannerView) {
+                [self destroyBanner];
+            }
 
             self.bannerView = bannerView;
 
@@ -392,12 +437,9 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
             bannerView.frame = bannerRect;
 
-            [self.viewController.view addSubview:bannerView];
-            [self.viewController.view bringSubviewToFront:bannerView];
-
+            self.loadingBanner = false;
             NSLog(@"%s", __PRETTY_FUNCTION__);
             [self emitWindowEvent:EVENT_BANNER_DID_LOAD];
-
         }
     }
 

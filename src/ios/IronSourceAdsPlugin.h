@@ -4,9 +4,10 @@
 
 @interface IronSourceAdsPlugin : CDVPlugin <ISRewardedVideoDelegate, ISBannerDelegate, ISOfferwallDelegate, ISInterstitialDelegate>
 
-@property (nonatomic, strong) ISBannerView *bannerView;
-@property (nonatomic) bool loadingBanner;
-@property (nonatomic) NSString *bannerPosition;
+@property(nonatomic, strong) ISBannerView *bannerView;
+@property(nonatomic) bool loadingBanner;
+@property(nonatomic) NSString *bannerPosition;
+@property(nonatomic) UIViewController *bannerController;
 
 - (void)init:(CDVInvokedUrlCommand *)command;
 
@@ -17,6 +18,8 @@
 - (void)showRewardedVideo:(CDVInvokedUrlCommand *)command;
 
 - (void)hasRewardedVideo:(CDVInvokedUrlCommand *)command;
+
+- (void)loadBanner:(CDVInvokedUrlCommand *)command;
 
 - (void)showBanner:(CDVInvokedUrlCommand *)command;
 

@@ -77,7 +77,7 @@
         </config-file>
         <header-file src="src/ios/IronSourceAdsPlugin.h" />
         <source-file src="src/ios/IronSourceAdsPlugin.m" />
-        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.3.1" />
+        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.6.0" />
 
         <!-- ADD MEDIATION FRAMEWORKS HERE -->
         <!-- Example -->

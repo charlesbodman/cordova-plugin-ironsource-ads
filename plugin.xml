@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-ironsource-ads" version="0.1.1" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+<plugin id="cordova-plugin-ironsource-ads" version="0.1.3" xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <name>cordova-plugin-ironsource-ads</name>
     <description>Cordova plugin for IronSource Ads</description>
@@ -77,10 +77,10 @@
         </config-file>
         <header-file src="src/ios/IronSourceAdsPlugin.h" />
         <source-file src="src/ios/IronSourceAdsPlugin.m" />
-        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.6.0" />
-        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.0.2.4" />
-        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.0.2.3" />
-        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.0.1.6" />
+        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.8.0" />
+        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.1.3.0" />
+        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.1.3.0" />
+        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.1.0.2" />
 
         <!-- ADD MEDIATION FRAMEWORKS HERE -->
         <!-- Example -->

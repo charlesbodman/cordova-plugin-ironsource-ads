@@ -3,7 +3,7 @@
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">
-<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.8.0-blue.svg?style=flat-square">
+<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.9.1-blue.svg?style=flat-square">
 </p>
 
 --------
@@ -417,7 +417,7 @@ cdvPluginPostBuildExtras.add({
   }
 
   dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.3@jar'
+    compile 'com.ironsource.sdk:mediationsdk:6.7.9.1@jar'
 
     //Example
     compile 'com.ironsource.adapters:admobadapter:4.0.3@jar'

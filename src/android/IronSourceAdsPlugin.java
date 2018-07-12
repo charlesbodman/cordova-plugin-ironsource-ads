@@ -3,10 +3,13 @@ package com.charlesbodman.cordova.plugin.ironsource;
 import android.util.Log;
 import android.text.TextUtils;
 import android.os.AsyncTask;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.RelativeLayout;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaInterface;
@@ -70,7 +73,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     private RelativeLayout bannerContainerLayout;
     private CordovaWebView cordovaWebView;
 
-    private FrameLayout parentLayout;
+    private ViewGroup parentLayout;
 
     @Override
     public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
@@ -148,7 +151,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         return false;
     }
 
-    /**--------------------------------------------------------------- */
+    /** --------------------------------------------------------------- */
 
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         cordovaWebView = webView;
@@ -167,7 +170,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         IronSource.onResume(this.cordova.getActivity());
     }
 
-    /**----------------------- UTILS --------------------------- */
+    /** ----------------------- UTILS --------------------------- */
 
     private JSONObject createErrorJSON(IronSourceError ironSourceError) {
         JSONObject data = new JSONObject();
@@ -203,11 +206,10 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         });
     }
 
-    /**----------------------- INITIALIZATION  --------------------------- */
+    /** ----------------------- INITIALIZATION --------------------------- */
 
     /**
-     * Intilization action
-     * Initializes IronSource
+     * Intilization action Initializes IronSource
      */
     private void initAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
@@ -249,6 +251,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     /**
      * Initializes IronSource
+     *
      * @todo Provide
      */
     private void init(String appKey, String userId) {
@@ -273,7 +276,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         IronSource.init(this.cordova.getActivity(), appKey);
     }
 
-    /**----------------------- SET DYNAMIC USER ID --------------------------- */
+    /** ----------------------- SET DYNAMIC USER ID --------------------------- */
 
     private void setDynamicUserIdAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
@@ -287,7 +290,9 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         });
     }
 
-    /**----------------------- VALIDATION INTEGRATION --------------------------- */
+    /**
+     * ----------------------- VALIDATION INTEGRATION ---------------------------
+     */
 
     /**
      * Validates integration action
@@ -302,7 +307,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         });
     }
 
-    /**----------------------- REWARDED VIDEO --------------------------- */
+    /** ----------------------- REWARDED VIDEO --------------------------- */
 
     private void showRewardedVideoAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
@@ -406,7 +411,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     }
 
-    /**----------------------- INTERSTITIAL --------------------------- */
+    /** ----------------------- INTERSTITIAL --------------------------- */
 
     private void hasInterstitialAction(JSONArray args, final CallbackContext callbackContext) {
         cordova.getActivity().runOnUiThread(new Runnable() {
@@ -473,7 +478,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         this.emitWindowEvent(EVENT_INTERSTITIAL_CLICKED, new JSONObject());
     }
 
-    /**----------------------- OFFERWALL --------------------------- */
+    /** ----------------------- OFFERWALL --------------------------- */
 
     private void showOfferwallAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
@@ -548,7 +553,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         this.emitWindowEvent(EVENT_OFFERWALL_CLOSED);
     }
 
-    /**----------------------- BANNER --------------------------- */
+    /** ----------------------- BANNER --------------------------- */
     private void showBannerAction(JSONArray args, final CallbackContext callbackContext) {
 
         final IronSourceAdsPlugin self = this;
@@ -558,7 +563,26 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             public void run() {
 
                 if (mIronSourceBannerLayout != null) {
-                    parentLayout = (FrameLayout) cordovaWebView.getView().getParent();
+
+                    parentLayout = (ViewGroup) cordovaWebView.getView().getParent();
+
+                    View view = cordovaWebView.getView();
+
+                    ViewGroup wvParentView = (ViewGroup) view.getParent();
+
+                    LinearLayout parentView = new LinearLayout(cordovaWebView.getContext());
+
+                    if (wvParentView != null && wvParentView != parentView) {
+                        ViewGroup rootView = (ViewGroup) (view.getParent());
+                        wvParentView.removeView(view);
+                        ((LinearLayout) parentView).setOrientation(LinearLayout.VERTICAL);
+                        parentView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT, 0.0F));
+                        view.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                                ViewGroup.LayoutParams.MATCH_PARENT, 1.0F));
+                        parentView.addView(view);
+                        rootView.addView(parentView);
+                    }
 
                     bannerContainerLayout = new RelativeLayout(self.cordova.getActivity());
 
@@ -574,7 +598,10 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
                     bannerContainerLayout.addView(mIronSourceBannerLayout, layoutParams);
 
-                    parentLayout.addView(bannerContainerLayout, bannerContainerLayoutParams);
+                    mIronSourceBannerLayout.setLayoutParams(layoutParams);
+
+                    parentView.addView(bannerContainerLayout);
+
                 }
 
                 callbackContext.success();

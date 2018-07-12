@@ -7,6 +7,6 @@ cdvPluginPostBuildExtras.add({
   }
 
   dependencies {
-    compile 'com.ironsource.sdk:mediationsdk:6.7.8@jar'
+    compile 'com.ironsource.sdk:mediationsdk:6.7.9.1@jar'
   }
 });

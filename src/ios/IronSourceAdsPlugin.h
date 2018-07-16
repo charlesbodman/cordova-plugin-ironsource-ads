@@ -13,6 +13,8 @@
 
 - (void)setDynamicUserId:(CDVInvokedUrlCommand *)command;
 
+- (void)setConsent:(CDVInvokedUrlCommand *)command;
+
 - (void)validateIntegration:(CDVInvokedUrlCommand *)command;
 
 - (void)showRewardedVideo:(CDVInvokedUrlCommand *)command;

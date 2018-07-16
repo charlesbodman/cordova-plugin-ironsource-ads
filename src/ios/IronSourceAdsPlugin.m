@@ -87,6 +87,17 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
+- (void)setConsent:(CDVInvokedUrlCommand *)command
+{
+    BOOL *consent = [command argumentAtIndex:0];
+
+    [IronSource setConsent:consent];
+
+    // Send callback successfull
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
 /**
  * Emit window event
  * @param {NString} - event name

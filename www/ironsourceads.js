@@ -28,7 +28,23 @@ var IronSourceAds = (function () {
 
             callPlugin('setDynamicUserId', [params.userId], params.onSuccess, params.onFailure);
         },
+		
+        /**
+         * Sets the user consent, used for displaying personalized ads and GDPR terms
+         * @param {Boolean} params.consent - consent
+         * @param {Function} params.onSuccess - optional on success callback
+         * @param {Function} params.onFailure - optional on failure callback
+         */
+        setConsent: function setConsent(params) {
 
+            params = defaults(params, {});
+
+            if (params.hasOwnProperty('consent') === false) {
+                throw new Error("IronSourceAds::setConsent - missing consent IronSourceAds.setConsent({consent:true})");
+            }
+
+            callPlugin('setConsent', [params.consent], params.onSuccess, params.onFailure);
+        },
 
         /**
          * Validate Integration

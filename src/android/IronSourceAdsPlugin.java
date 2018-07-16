@@ -87,6 +87,11 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             this.setDynamicUserIdAction(args, callbackContext);
             return true;
         }
+		
+        else if (action.equals("setConsent")) {
+            this.setConsentAction(args, callbackContext);
+            return true;
+        }
 
         else if (action.equals("validateIntegration")) {
             this.validateIntegrationAction(args, callbackContext);
@@ -285,6 +290,20 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
                 IronSource.setDynamicUserId(userId);
+                callbackContext.success();
+            }
+        });
+    }
+	
+	/** ----------------------- SET CONSENT --------------------------- */
+
+    private void setConsentAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
+
+        final boolean consent = args.getBoolean(0);
+
+        cordova.getActivity().runOnUiThread(new Runnable() {
+            public void run() {
+                IronSource.setConsent(consent);
                 callbackContext.success();
             }
         });

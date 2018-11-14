@@ -18,7 +18,7 @@
 
 
 ## State of Development
-- ALl banner sizes have not been implemented.
+- All banner sizes have not been implemented.
 - Pull requests are very much welcome.
 
 --------

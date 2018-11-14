@@ -3,7 +3,7 @@
 
 <p align="left">
 <img src="https://img.shields.io/badge/State-In%20Development-yellowgreen.svg?style=flat-square">
-<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.9.1-blue.svg?style=flat-square">
+<img src="https://img.shields.io/badge/IronSource%20Framework%20Version-6.7.12.0-blue.svg?style=flat-square">
 </p>
 
 --------

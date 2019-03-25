@@ -23,6 +23,7 @@ static NSString *const EVENT_REWARDED_VIDEO_STARTED = @"rewardedVideoStarted";
 static NSString *const EVENT_REWARDED_VIDEO_AVAILABILITY_CHANGED = @"rewardedVideoAvailabilityChanged";
 static NSString *const EVENT_REWARDED_VIDEO_CLOSED = @"rewardedVideoClosed";
 static NSString *const EVENT_REWARDED_VIDEO_OPENED = @"rewardedVideoOpened";
+static NSString *const EVENT_REWARDED_VIDEO_CLICKED = @"rewardedVideoClicked";
 
 static NSString *const EVENT_BANNER_DID_LOAD = @"bannerDidLoad";
 static NSString *const EVENT_BANNER_FAILED_TO_LOAD = @"bannerFailedToLoad";
@@ -65,6 +66,7 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     }
 
     self.bannerController = [[UIViewController alloc] init];
+    [self.bannerController.view setHidden:YES];
 
     // After setting the delegates you can go ahead and initialize the SDK.
     [IronSource setUserId:userId];
@@ -81,17 +83,6 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     NSString *userId = [command argumentAtIndex:0];
 
     [IronSource setDynamicUserId:userId];
-
-    // Send callback successfull
-    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
-}
-
-- (void)setConsent:(CDVInvokedUrlCommand *)command
-{
-    BOOL consent = [command argumentAtIndex:0];
-
-    [IronSource setConsent:consent];
 
     // Send callback successfull
     CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -288,7 +279,7 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 //Invoked when the end user clicked on the RewardedVideo ad
 - (void)didClickRewardedVideo:(ISPlacementInfo *)placementInfo
 {
-
+    [self emitWindowEvent:EVENT_REWARDED_VIDEO_CLICKED];
 }
 
 
@@ -297,7 +288,11 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     NSString *placement = [command argumentAtIndex:0];
     NSString *size = [command argumentAtIndex:1];
     NSString *position = [command argumentAtIndex:2];
-    ISBannerSize *adSize = ISBannerSize_SMART;
+    NSInteger adSize = IS_AD_SIZE_BANNER;
+
+    for (UIView *subUIView in self.bannerController.view.subviews ) {
+        [subUIView removeFromSuperview];
+    }
 
     // We call destroy banner before loading a new banner
     if (self.bannerView) {
@@ -306,15 +301,15 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
     if([size isEqualToString:@"large"])
     {
-        adSize = ISBannerSize_LARGE;
+        adSize = IS_AD_SIZE_LARGE_BANNER;
     }
     else if([size isEqualToString:@"rectangle"])
     {
-        adSize = ISBannerSize_RECTANGLE;
+        adSize = IS_AD_SIZE_RECTANGLE_BANNER;
     }
     else if([size isEqualToString:@"tablet"])
     {
-        adSize = ISBannerSize_LARGE;
+        adSize = IS_AD_SIZE_LARGE_BANNER;
     }
 
     self.bannerPosition = position;

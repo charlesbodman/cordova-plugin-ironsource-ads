@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import com.ironsource.adapters.supersonicads.SupersonicConfig;
 import com.ironsource.mediationsdk.IronSource;
 import com.ironsource.mediationsdk.IronSourceBannerLayout;
-import com.ironsource.mediationsdk.EBannerSize;
+import com.ironsource.mediationsdk.ISBannerSize;
 import com.ironsource.mediationsdk.integration.IntegrationHelper;
 import com.ironsource.mediationsdk.logger.IronSourceError;
 import com.ironsource.mediationsdk.model.Placement;
@@ -61,6 +61,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     private static final String EVENT_REWARDED_VIDEO_AVAILABILITY_CHANGED = "rewardedVideoAvailabilityChanged";
     private static final String EVENT_REWARDED_VIDEO_CLOSED = "rewardedVideoClosed";
     private static final String EVENT_REWARDED_VIDEO_OPENED = "rewardedVideoOpened";
+    private static final String EVENT_REWARDED_VIDEO_CLICKED = "rewardedVideoClicked";
 
     private static final String EVENT_BANNER_DID_LOAD = "bannerDidLoad";
     private static final String EVENT_BANNER_FAILED_TO_LOAD = "bannerFailedToLoad";
@@ -71,8 +72,9 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     private IronSourceBannerLayout mIronSourceBannerLayout;
     private RelativeLayout bannerContainerLayout;
+    private boolean bannerLoaded;
+    private boolean bannerShowing;
     private CordovaWebView cordovaWebView;
-
     private ViewGroup parentLayout;
 
     @Override
@@ -87,7 +89,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             this.setDynamicUserIdAction(args, callbackContext);
             return true;
         }
-		
+
         else if (action.equals("setConsent")) {
             this.setConsentAction(args, callbackContext);
             return true;
@@ -160,6 +162,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         cordovaWebView = webView;
+        bannerLoaded = false;
+        bannerShowing = false;
         super.initialize(cordova, webView);
     }
 
@@ -178,6 +182,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     /** ----------------------- UTILS --------------------------- */
 
     private JSONObject createErrorJSON(IronSourceError ironSourceError) {
+
         JSONObject data = new JSONObject();
         JSONObject errorData = new JSONObject();
         try {
@@ -294,8 +299,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
             }
         });
     }
-	
-	/** ----------------------- SET CONSENT --------------------------- */
+
+    /** ----------------------- SET CONSENT --------------------------- */
 
     private void setConsentAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
@@ -329,13 +334,10 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     /** ----------------------- REWARDED VIDEO --------------------------- */
 
     private void showRewardedVideoAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
-
-        final String placementName = args.getString(0);
-
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
 
-                IronSource.showRewardedVideo(placementName);
+                IronSource.showRewardedVideo();
                 callbackContext.success();
             }
         });
@@ -427,7 +429,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     @Override
     public void onRewardedVideoAdClicked(Placement placement) {
-
+        this.emitWindowEvent(EVENT_REWARDED_VIDEO_CLICKED);
     }
 
     /** ----------------------- INTERSTITIAL --------------------------- */
@@ -451,12 +453,9 @@ public class IronSourceAdsPlugin extends CordovaPlugin
     }
 
     private void showInterstitialAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
-
-        final String placementName = args.getString(0);
-
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                IronSource.showInterstitial(placementName);
+                IronSource.showInterstitial();
                 callbackContext.success();
             }
         });
@@ -501,11 +500,9 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
     private void showOfferwallAction(JSONArray args, final CallbackContext callbackContext) throws JSONException {
 
-        final String placementName = args.getString(0);
-
         cordova.getActivity().runOnUiThread(new Runnable() {
             public void run() {
-                IronSource.showOfferwall(placementName);
+                IronSource.showOfferwall();
                 callbackContext.success();
             }
         });
@@ -581,7 +578,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
             public void run() {
 
-                if (mIronSourceBannerLayout != null) {
+                if (mIronSourceBannerLayout != null && bannerLoaded) {
 
                     parentLayout = (ViewGroup) cordovaWebView.getView().getParent();
 
@@ -620,7 +617,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
                     mIronSourceBannerLayout.setLayoutParams(layoutParams);
 
                     parentView.addView(bannerContainerLayout);
-
+                    
+                    bannerShowing = true;
                 }
 
                 callbackContext.success();
@@ -637,10 +635,11 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
             public void run() {
 
+                hideBanner();
                 destroyBanner();
 
                 // choose banner size
-                EBannerSize size = EBannerSize.BANNER;
+                ISBannerSize size = ISBannerSize.BANNER;
 
                 // instantiate IronSourceBanner object, using the IronSource.createBanner API
                 mIronSourceBannerLayout = IronSource.createBanner(self.cordova.getActivity(), size);
@@ -653,6 +652,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
                         public void onBannerAdLoaded() {
                             Log.d(TAG, "onBannerAdLoaded");
                             self.emitWindowEvent(EVENT_BANNER_DID_LOAD);
+                            bannerLoaded = true;
                         }
 
                         @Override
@@ -698,6 +698,8 @@ public class IronSourceAdsPlugin extends CordovaPlugin
         cordova.getActivity().runOnUiThread(new Runnable() {
 
             public void run() {
+
+                bannerShowing = false;
 
                 if (mIronSourceBannerLayout != null) {
                     if (parentLayout != null && bannerContainerLayout != null) {

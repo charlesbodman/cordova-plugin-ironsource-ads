@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-ironsource-ads" version="0.1.8" xmlns="http://apache.org/cordova/ns/plugins/1.0"
+<plugin id="cordova-plugin-ironsource-ads" version="0.1.9" xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
     <name>cordova-plugin-ironsource-ads</name>
     <description>Cordova plugin for IronSource Ads</description>
@@ -8,9 +8,9 @@
     </js-module>
 
     <engines>
-        <engine name="cordova" version=">=6.3.0" />
+        <engine name="cordova" version=">=3.0" />
         <engine name="cordova-android" version=">=4.0.0" />
-        <engine name="cordova-ios" version=">=4.3.0" />
+        <engine name="cordova-ios" version=">=4.0.0" />
     </engines>
 
     <platform name="android">
@@ -21,29 +21,21 @@
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest">
-          <uses-permission android:name="android.permission.INTERNET" />
-          <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-          <!-- ADD MEDIATION PERMISSIONS HERE -->
+        
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+        
+            <!-- ADD MEDIATION PERMISSIONS HERE -->
 
             <!--Requested by Applovin + HyperMX + Vungle -->
-            <!-- <uses-permission
+            <uses-permission
                 android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-                android:maxSdkVersion="18" /> -->
-
-            <!--Requested by Flurry -->
-            <!-- <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> -->
-
-            <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version" />
-
-
+                android:maxSdkVersion="18" />
+            
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
 
-            <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
 
             <activity
                 android:name="com.ironsource.sdk.controller.ControllerActivity"
@@ -60,13 +52,154 @@
                 android:hardwareAccelerated="true"
                 android:theme="@android:style/Theme.Translucent" />
 
+            <!-- AdColony -->
+            <activity
+                android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:hardwareAccelerated="true" />
 
+            <activity
+                android:name="com.adcolony.sdk.AdColonyAdViewActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:hardwareAccelerated="true" />
+
+
+            <!-- AppLovin -->
+            <activity android:name="com.applovin.adview.AppLovinInterstitialActivity" android:configChanges="orientation|screenSize"/>
+            <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" android:configChanges="orientation|screenSize"/>
+
+            <!-- UnityAds-->
+            <activity
+                android:name="com.unity3d.services.ads.adunit.AdUnitActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+            <activity
+                android:name="com.unity3d.services.ads.adunit.AdUnitTransparentActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            <activity
+                android:name="com.unity3d.services.ads.adunit.AdUnitTransparentSoftwareActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="false"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            <activity
+                android:name="com.unity3d.services.ads.adunit.AdUnitSoftwareActivity"
+                android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
+                android:hardwareAccelerated="false"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+            <!-- Chartboost-->
+            <activity
+                android:name="com.chartboost.sdk.CBImpressionActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:excludeFromRecents="true"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+            <!-- HyprMx-->
+            <activity
+                android:name="com.ironsource.adapters.hyprmx.MediationHMXActivity"
+                android:configChanges="orientation|screenSize|keyboardHidden|keyboard|smallestScreenSize|uiMode|fontScale|screenLayout|locale" />
+
+
+            <!-- TapJoy -->
+            <activity
+                android:name="com.tapjoy.TJAdUnitActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+            <activity
+                android:name="com.tapjoy.mraid.view.ActionHandler"
+                android:configChanges="orientation|keyboardHidden|screenSize" />
+            <activity
+                android:name="com.tapjoy.mraid.view.Browser"
+                android:configChanges="orientation|keyboardHidden|screenSize" />
+            <activity
+                android:name="com.tapjoy.TJContentActivity"
+                android:configChanges="orientation|keyboardHidden|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+            <!-- AdMob -->
+            <activity
+                android:name="com.google.android.gms.ads.AdActivity"
+                android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+                android:theme="@android:style/Theme.Translucent" />
+
+            <!-- MediaBrix -->
+            <activity
+                android:name="com.mediabrix.android.service.AdViewActivity"
+                android:configChanges="orientation|screenSize|keyboard"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+            <activity
+                android:name="com.mediabrix.android.service.ClickOutActivity"
+                android:configChanges="orientation|screenSize|keyboard"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+
+            <service android:name="com.mediabrix.android.service.MediaBrixService"/>
+
+            <!-- Facebook -->
+            <activity
+                android:name="com.facebook.ads.AudienceNetworkActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity
+                android:name="com.facebook.ads.internal.ipc.RemoteANActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:exported="false"
+                android:process=":adnw" />
+
+            <service
+                android:name="com.facebook.ads.internal.ipc.AdsProcessPriorityService"
+                android:exported="false" />
+            <service
+                android:name="com.facebook.ads.internal.ipc.AdsMessengerService"
+                android:exported="false"
+                android:process=":adnw" />
+
+            <!-- MoPub -->
+            <activity
+                android:name="com.mopub.mobileads.MoPubActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity
+                android:name="com.mopub.mobileads.MraidActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity
+                android:name="com.mopub.common.MoPubBrowser"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+            <activity
+                android:name="com.mopub.mobileads.MraidVideoPlayerActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize" />
+
+            <!-- Maio -->
+            <uses-library android:name="org.apache.http.legacy" android:required="false" />
+            <activity
+                android:name="jp.maio.sdk.android.AdFullscreenActivity"
+                android:configChanges="orientation|screenLayout|screenSize"
+                android:hardwareAccelerated="true"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            </activity>
+            <activity
+                android:name="jp.maio.sdk.android.HtmlBasedAdActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            </activity>
+
+            <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+            
         </config-file>
 
         <source-file src="src/android/IronSourceAdsPlugin.java"
             target-dir="src/com/charlesbodman/cordova/plugin/ironsource" />
         <framework src="src/android/ironsourceads.gradle" custom="true" type="gradleReference" />
-        <framework src="com.google.android.gms:play-services-ads:+" />
+        
+        <framework src="com.android.support:support-v4:+" />
+        <framework src="com.android.support:recyclerview-v7:27.1.1" />
+        
     </platform>
 
     <platform name="ios">
@@ -77,18 +210,14 @@
         </config-file>
         <header-file src="src/ios/IronSourceAdsPlugin.h" />
         <source-file src="src/ios/IronSourceAdsPlugin.m" />
-        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.12.0" />
-        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.3.0.0" />
-        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.3.0.0" />
-        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.1.1.6" />
-
+        
+        <framework src="IronSourceSDK" type="podspec" spec="~> 6.8.1.0" />
+        
         <!-- ADD MEDIATION FRAMEWORKS HERE -->
-        <!-- Example -->
-        <!-- <framework src="ISAdColonyAdapter.framework" custom="true" /> -->
-        <!-- <framework src="ISAdMobAdapter.framework" custom="true" /> -->
-        <!-- Example -->
-
-        <framework src="CoreFoundation.framework" weak="true"/>
+        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.3.3.0" />
+        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.3.1.0" />
+        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.1.2.2" />
+        
         <framework src="Foundation.framework" />
         <framework src="AVFoundation.framework" />
         <framework src="CoreMedia.framework" />

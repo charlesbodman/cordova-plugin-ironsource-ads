@@ -635,7 +635,7 @@ public class IronSourceAdsPlugin extends CordovaPlugin
 
             public void run() {
 
-                hideBanner();
+                hideBannerView();
                 destroyBanner();
 
                 // choose banner size

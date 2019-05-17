@@ -274,3 +274,84 @@ window.addEventListener("offerwallShowFailed", function(){
 
 });
 ```
+
+# Adding Additional SDKS
+**By default, this plugin does not contain other ad providers sdks**
+
+### Android
+
+[Follow the integration guides here](https://developers.ironsrc.com/ironsource-mobile/android/android-sdk/#step-2)
+
+Edit `src/android/ironsourceads.gradle` from this plugin and add the mediation adapters you need
+
+*Example*
+```java
+cdvPluginPostBuildExtras.add({
+
+  repositories {
+    maven {
+      url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+    }
+  }
+
+  repositories {
+    maven {
+      url "http://dl.bintray.com/ironsource-mobile/android-adapters"
+    }
+  }
+
+  dependencies {
+    compile 'com.ironsource.sdk:mediationsdk:6.7.3@jar'
+
+    //Example
+    compile 'com.ironsource.adapters:admobadapter:4.0.3@jar'
+    compile 'com.ironsource.adapters:facebookadapter:4.0.2@jar'
+    compile 'com.ironsource.adapters:unityadsadapter:4.0.1@jar'
+  }
+});
+
+```
+
+### IOS
+**IOS requires manual downloading of Adapter & SDK**
+[Download Adapters Here and follow the integration guides](http://developers.ironsrc.com/ironsource-mobile/ios/ios-sdk/#step-2)
+
+*If you have any questions, create an issue, and I'll walk you through it. *
+
+**Edit `plugin.xml` of this plugin**
+
+```xml
+   <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="IronSourceAdsPlugin">
+                <param name="ios-package" value="IronSourceAdsPlugin" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/IronSourceAdsPlugin.h" />
+        <source-file src="src/ios/IronSourceAdsPlugin.m" />
+        <framework src="IronSourceSDK" type="podspec" spec="~> 6.7.3.1" />
+
+        <!-- ADD MEDIATION FRAMEWORKS HERE -->
+        <!-- Example -->
+        <framework src="IronSourceFacebookAdapter" type="podspec" spec="~> 4.0.2.1" />
+        <framework src="IronSourceAdMobAdapter" type="podspec" spec="~> 4.0.1.1" />
+        <framework src="IronSourceUnityAdsAdapter" type="podspec" spec="~> 4.0.1.2" />
+        <!-- Example -->
+
+        <framework src="Foundation.framework" />
+        <framework src="AVFoundation.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="CoreVideo.framework" />
+        <framework src="QuartzCore.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="CoreGraphics.framework" />
+        <framework src="CFNetwork.framework" />
+        <framework src="MobileCoreServices.framework" />
+        <framework src="libz.dylib" />
+        <framework src="StoreKit.framework" />
+        <framework src="AdSupport.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="CoreTelephony.framework" />
+        <framework src="Security.framework" />
+    </platform>
+```

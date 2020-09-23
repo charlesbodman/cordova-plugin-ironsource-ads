@@ -30,7 +30,9 @@
             <!--Requested by Applovin + HyperMX + Vungle -->
             <uses-permission
                 android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-                android:maxSdkVersion="18" />
+                android:maxSdkVersion="18"
+                tools:node="replace"
+            />
             
         </config-file>
 

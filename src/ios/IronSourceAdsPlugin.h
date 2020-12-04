@@ -4,15 +4,23 @@
 
 @interface IronSourceAdsPlugin : CDVPlugin <ISRewardedVideoDelegate, ISBannerDelegate, ISOfferwallDelegate, ISInterstitialDelegate>
 
+@property(nonatomic, strong) ISBannerView *bannerView;
+@property(nonatomic) NSString *bannerPosition;
+@property(nonatomic) UIViewController *bannerController;
+
 - (void)init:(CDVInvokedUrlCommand *)command;
 
 - (void)setDynamicUserId:(CDVInvokedUrlCommand *)command;
+
+- (void)setConsent:(CDVInvokedUrlCommand *)command;
 
 - (void)validateIntegration:(CDVInvokedUrlCommand *)command;
 
 - (void)showRewardedVideo:(CDVInvokedUrlCommand *)command;
 
 - (void)hasRewardedVideo:(CDVInvokedUrlCommand *)command;
+
+- (void)loadBanner:(CDVInvokedUrlCommand *)command;
 
 - (void)showBanner:(CDVInvokedUrlCommand *)command;
 

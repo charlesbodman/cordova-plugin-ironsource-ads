@@ -89,6 +89,17 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
+- (void)setConsent:(CDVInvokedUrlCommand *)command
+{
+    BOOL consent = [command argumentAtIndex:0];
+
+    [IronSource setConsent:consent];
+
+    // Send callback successfull
+    CDVPluginResult *result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+}
+
 /**
  * Emit window event
  * @param {NString} - event name
@@ -288,11 +299,7 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
     NSString *placement = [command argumentAtIndex:0];
     NSString *size = [command argumentAtIndex:1];
     NSString *position = [command argumentAtIndex:2];
-    NSInteger adSize = IS_AD_SIZE_BANNER;
-
-    for (UIView *subUIView in self.bannerController.view.subviews ) {
-        [subUIView removeFromSuperview];
-    }
+    ISBannerSize *adSize = ISBannerSize_SMART;
 
     // We call destroy banner before loading a new banner
     if (self.bannerView) {
@@ -301,15 +308,15 @@ static NSString *const EVENT_BANNER_WILL_LEAVE_APPLICATION = @"bannerWillLeaveAp
 
     if([size isEqualToString:@"large"])
     {
-        adSize = IS_AD_SIZE_LARGE_BANNER;
+        adSize = ISBannerSize_LARGE;
     }
     else if([size isEqualToString:@"rectangle"])
     {
-        adSize = IS_AD_SIZE_RECTANGLE_BANNER;
+        adSize = ISBannerSize_RECTANGLE;
     }
     else if([size isEqualToString:@"tablet"])
     {
-        adSize = IS_AD_SIZE_LARGE_BANNER;
+        adSize = ISBannerSize_LARGE;
     }
 
     self.bannerPosition = position;
